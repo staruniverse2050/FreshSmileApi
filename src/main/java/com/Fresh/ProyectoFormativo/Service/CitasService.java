@@ -1,12 +1,13 @@
 package com.Fresh.ProyectoFormativo.Service;
+import com.Fresh.ProyectoFormativo.Entity.Agenda;
 import com.Fresh.ProyectoFormativo.Entity.Citas;
 
 import java.util.List;
 
 public interface CitasService {
-    List<Citas> ConsultarCitas();
-    Citas CrearCita(Citas citas);
-    Citas ModificarCita(Citas citas);
-    Citas BuscarCita(int id);
-    void CancelarCita(int id);
+    public List<Citas> ConsultarCitas();
+    public Citas CrearCita(Citas citas);
+    public Citas ModificarCita(Citas citas);
+    public Citas BuscarCita(int id);
+    public void CancelarCita(int id);
 }

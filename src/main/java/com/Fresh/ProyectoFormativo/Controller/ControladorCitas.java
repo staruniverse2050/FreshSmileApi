@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/FreshSmile")
+@RequestMapping("FreshSmile")
 public class ControladorCitas {
     private final CitasService citasService;
 
@@ -26,18 +26,18 @@ public class ControladorCitas {
     }
 
     @PostMapping("/CrearCita")
-    public ResponseEntity<String> crearCita(@RequestBody Citas cita) {
-        Citas nuevaCita = citasService.CrearCita(cita);
+    public ResponseEntity<String> crearCita(@RequestBody Citas citas) {
+        Citas nuevaCita = citasService.CrearCita(citas);
         String mensaje = "Cita creada exitosamente"; // Success message
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
     @PutMapping("/ModificarCita/{id}")
-    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas cita) {
+    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
         Citas citaExistente = citasService.BuscarCita(id);
         // Update the fields of the appointment as necessary
-        citaExistente.setFecha_cita(cita.getFecha_cita());
-        citaExistente.setHora_cita(cita.getHora_cita());
+        citaExistente.setFecha_cita(citas.getFecha_cita());
+        citaExistente.setHora_cita(citas.getHora_cita());
         // Update other fields of the appointment as necessary
         Citas citaActualizada = citasService.ModificarCita(citaExistente);
         return ResponseEntity.ok(citaActualizada);

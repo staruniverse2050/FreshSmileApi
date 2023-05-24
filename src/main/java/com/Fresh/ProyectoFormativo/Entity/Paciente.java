@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
         private BigInteger telefono_paciente;
 
         @Column(name = "correo_paciente")
-        private String correo_paciente;
+        private static String correo_paciente;
 
         @Column(name = "contraseña_paciente")
         private String contraseña_paciente;
@@ -106,7 +106,7 @@ import java.time.LocalDateTime;
             this.telefono_paciente = telefono_paciente;
         }
 
-        public String getCorreo_paciente() {
+        public static String getCorreo_paciente() {
             return correo_paciente;
         }
 

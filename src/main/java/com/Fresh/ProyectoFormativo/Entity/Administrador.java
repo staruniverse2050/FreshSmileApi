@@ -28,10 +28,10 @@ public class Administrador {
     private BigInteger telefono_uadministrador;
 
     @Column(name = "correo_uadministrador")
-    private String correo_uadministrador;
+    private static String correo_uadministrador;
 
     @Column(name = "contraseña_uadministrador")
-    private String contraseña_uadministrador;
+    private static String contraseña_uadministrador;
     @Column(name = "Estado")
     private boolean Estado;
 
@@ -94,7 +94,7 @@ public class Administrador {
         this.telefono_uadministrador = telefono_uadministrador;
     }
 
-    public String getCorreo_uadministrador() {
+    public static String getCorreo_uadministrador() {
         return correo_uadministrador;
     }
 
@@ -102,7 +102,7 @@ public class Administrador {
         this.correo_uadministrador = correo_uadministrador;
     }
 
-    public String getContraseña_uadministrador() {
+    public static String getContraseña_uadministrador() {
         return contraseña_uadministrador;
     }
 

@@ -4,7 +4,6 @@ import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PacienteRepo extends CrudRepository<Paciente,Integer> {
-    // Consulta para obtener los pacientes eliminados
 }
 
 
