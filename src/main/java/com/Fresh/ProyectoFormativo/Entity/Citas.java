@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "cita")
+@Table(name = "citas")
 public class Citas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,6 @@ public class Citas {
 
     @Column(name = "id_pacientecita")
     private int id_pacientecita;
-
-    @Column(name = "id_agendaCitas")
-    private int id_agendaCitas;
 
     @Column(name = "id_administradorcita")
     private int id_administradorcita;
@@ -30,11 +27,23 @@ public class Citas {
     @Column(name = "hora_cita")
     private LocalTime hora_cita;
 
+    @Column(name = "tipo_cita")
+    private String tipo_cita;
+
+    @Column(name = "sede")
+    private String sede;
+
     @Column(name = "estado")
     private String estado;
 
     @Column(name = "costo")
     private BigDecimal costo;
+
+    public String getSede() { return sede; }
+    public void setSede(String sede) { this.sede = sede; }
+
+    public String getTipo_cita() { return tipo_cita; }
+    public void setTipo_cita(String tipo_cita) { this.tipo_cita = tipo_cita; }
 
     public int getId_cita() {
         return id_cita;
@@ -50,14 +59,6 @@ public class Citas {
 
     public void setId_pacientecita(int id_pacientecita) {
         this.id_pacientecita = id_pacientecita;
-    }
-
-    public int getId_agendaCitas() {
-        return id_agendaCitas;
-    }
-
-    public void setId_agendaCitas(int id_agendaCitas) {
-        this.id_agendaCitas = id_agendaCitas;
     }
 
     public int getId_administradorcita() {

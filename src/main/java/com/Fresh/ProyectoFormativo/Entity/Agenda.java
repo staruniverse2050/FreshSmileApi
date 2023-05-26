@@ -3,6 +3,7 @@ package com.Fresh.ProyectoFormativo.Entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -27,12 +28,6 @@ public class Agenda {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "fecha_nacimiento")
-    private Date fecha_nacimiento;
-
-    @Column(name = "disponibilidad")
-    private String disponibilidad;
-
     @Column(name = "tipo_cita")
     private String tipo_cita;
 
@@ -40,7 +35,7 @@ public class Agenda {
     private String sede;
 
     @Column(name = "fecha_creacion")
-    private LocalDateTime fecha_creacion;
+    private Timestamp fecha_creacion;
 
     public int getId_agenda() {
         return id_agenda;
@@ -82,22 +77,6 @@ public class Agenda {
         this.email = email;
     }
 
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public String getDisponibilidad() {
-        return disponibilidad;
-    }
-
-    public void setDisponibilidad(String disponibilidad) {
-        this.disponibilidad = disponibilidad;
-    }
-
     public String getTipo_cita() {
         return tipo_cita;
     }
@@ -114,14 +93,14 @@ public class Agenda {
         this.sede = sede;
     }
     public Agenda() {
-        this.fecha_creacion = LocalDateTime.now();
+        this.fecha_creacion = Timestamp.valueOf(LocalDateTime.now());
     }
 
-    public LocalDateTime getFecha_creacion() {
+    public Timestamp getFecha_creacion() {
         return fecha_creacion;
     }
 
-    public void setFecha_creacion(LocalDateTime fecha_creacion) {
+    public void setFecha_creacion(Timestamp fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
     }
 }
