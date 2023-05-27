@@ -1,6 +1,6 @@
 package com.Fresh.ProyectoFormativo.Service.EspecialistaIMPL;
 
-import com.Fresh.ProyectoFormativo.Entity.Especialista;
+import com.Fresh.ProyectoFormativo.Documents.Especialista;
 import com.Fresh.ProyectoFormativo.Repository.EspecialistaRepo;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,7 @@ public class EspecialistaIMPL implements EspecialistaService {
     private EspecialistaRepo repo;
 
     @Override
-    public Especialista findEspecialistById(String id) {
-        return this.repo.findEspecialistById(id);
-    }
+    public Especialista findEspecialistById(String id) { return this.repo.findById(id).get(); }
 
     @Override
     public List<Especialista> findAllEspecialists() {
@@ -24,5 +22,17 @@ public class EspecialistaIMPL implements EspecialistaService {
     @Override
     public Especialista insertOneEspecialista(Especialista especialista) {
         return this.repo.save(especialista);
+    }
+
+    @Override
+    public void deleteOneEspecialista(String id) {
+        this.repo.deleteById(id);
+    }
+
+    @Override
+    public Especialista updateOneEspecialista(Especialista newEspecialista, String id) {
+        Especialista oldEspecialista = this.repo.findById(id).get();
+        oldEspecialista.
+        return null;
     }
 }
