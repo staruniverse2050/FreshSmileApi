@@ -12,6 +12,7 @@ com\Fresh\ProyectoFormativo\Service\AgendaServiceIMPL\AgendaServiceIMPL.class
 com\Fresh\ProyectoFormativo\Repository\AgendaRepo.class
 com\Fresh\ProyectoFormativo\Service\CitasService.class
 com\Fresh\ProyectoFormativo\Controller\ControladorPaciente.class
+com\Fresh\ProyectoFormativo\Entity\Especialista.class
 com\Fresh\ProyectoFormativo\ProyectoFormativoApplication.class
 com\Fresh\ProyectoFormativo\Service\AdministradorServiceIMPL\AdministradorServiceIMPL.class
 com\Fresh\ProyectoFormativo\Repository\AdministradorRepo.class
