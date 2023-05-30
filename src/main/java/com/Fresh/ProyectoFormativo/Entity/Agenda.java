@@ -92,17 +92,17 @@ public class Agenda {
         this.tipo_cita = tipo_cita;
     }
 
+
+    public Agenda() {
+        this.fecha_creacion = LocalDateTime.now();
+
+    }
     public LocalDateTime getFecha_creacion() {
         return fecha_creacion;
     }
 
     public void setFecha_creacion(LocalDateTime fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
-    }
-
-    public Agenda() {
-        this.fecha_creacion = LocalDateTime.now();
-
     }
 
 
