@@ -31,9 +31,6 @@ public class Agenda {
     @Column(name = "tipo_cita")
     private String tipo_cita;
 
-    @Column(name = "sede")
-    private String sede;
-
     @Column(name = "fecha_creacion")
     private Timestamp fecha_creacion;
 
@@ -85,13 +82,6 @@ public class Agenda {
         this.tipo_cita = tipo_cita;
     }
 
-    public String getSede() {
-        return sede;
-    }
-
-    public void setSede(String sede) {
-        this.sede = sede;
-    }
     public Agenda() {
         this.fecha_creacion = Timestamp.valueOf(LocalDateTime.now());
     }

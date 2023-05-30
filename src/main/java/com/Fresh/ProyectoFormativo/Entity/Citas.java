@@ -30,17 +30,12 @@ public class Citas {
     @Column(name = "tipo_cita")
     private String tipo_cita;
 
-    @Column(name = "sede")
-    private String sede;
-
     @Column(name = "estado")
     private String estado;
 
     @Column(name = "costo")
     private BigDecimal costo;
 
-    public String getSede() { return sede; }
-    public void setSede(String sede) { this.sede = sede; }
 
     public String getTipo_cita() { return tipo_cita; }
     public void setTipo_cita(String tipo_cita) { this.tipo_cita = tipo_cita; }
