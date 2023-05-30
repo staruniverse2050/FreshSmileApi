@@ -21,6 +21,8 @@ public class Agenda {
     @Column(name = "numero_documento")
     private String numero_documento;
 
+    @Column(name = "nombre")
+    private String nombre;
 
     @Column(name = "telefono")
     private String telefono;
@@ -32,7 +34,7 @@ public class Agenda {
     private String tipo_cita;
 
     @Column(name = "fecha_creacion")
-    private Timestamp fecha_creacion;
+    private LocalDateTime fecha_creacion;
 
     public int getId_agenda() {
         return id_agenda;
@@ -56,6 +58,14 @@ public class Agenda {
 
     public void setNumero_documento(String numero_documento) {
         this.numero_documento = numero_documento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTelefono() {
@@ -82,15 +92,18 @@ public class Agenda {
         this.tipo_cita = tipo_cita;
     }
 
-    public Agenda() {
-        this.fecha_creacion = Timestamp.valueOf(LocalDateTime.now());
-    }
-
-    public Timestamp getFecha_creacion() {
+    public LocalDateTime getFecha_creacion() {
         return fecha_creacion;
     }
 
-    public void setFecha_creacion(Timestamp fecha_creacion) {
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
     }
+
+    public Agenda() {
+        this.fecha_creacion = LocalDateTime.now();
+
+    }
+
+
 }

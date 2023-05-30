@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -29,16 +30,11 @@ public class Citas {
 
     @Column(name = "tipo_cita")
     private String tipo_cita;
-
     @Column(name = "estado")
     private String estado;
-
     @Column(name = "costo")
     private BigDecimal costo;
 
-
-    public String getTipo_cita() { return tipo_cita; }
-    public void setTipo_cita(String tipo_cita) { this.tipo_cita = tipo_cita; }
 
     public int getId_cita() {
         return id_cita;
@@ -78,6 +74,14 @@ public class Citas {
 
     public void setHora_cita(LocalTime hora_cita) {
         this.hora_cita = hora_cita;
+    }
+
+    public String getTipo_cita() {
+        return tipo_cita;
+    }
+
+    public void setTipo_cita(String tipo_cita) {
+        this.tipo_cita = tipo_cita;
     }
 
     public String getEstado() {
