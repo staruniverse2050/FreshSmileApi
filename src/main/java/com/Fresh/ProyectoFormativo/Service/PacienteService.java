@@ -5,10 +5,11 @@ import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import java.util.List;
 
 public interface PacienteService {
-    public List<Paciente> ConsultarPaciente();
-    public Paciente CrearPaciente(Paciente paciente);
-    public Paciente ModificarPaciente(Paciente paciente);
-    public Paciente BuscarPaciente(int id);
-    public void EliminarPaciente(int id);
-
+    List<Paciente> ConsultarPaciente();
+    Paciente CrearPaciente(Paciente paciente);
+    Paciente ModificarPaciente(Paciente paciente);
+    Paciente BuscarPaciente(int id);
+    void EliminarPaciente(int id);
+    void actualizarEstadoPaciente(Paciente paciente);
+    Paciente findByCorreoPacienteAndContraseñaPaciente(String correo, String contraseña);
 }

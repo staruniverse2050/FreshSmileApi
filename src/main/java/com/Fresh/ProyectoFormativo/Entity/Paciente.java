@@ -111,7 +111,7 @@ import java.time.LocalDateTime;
         }
 
         public void setCorreo_paciente(String correo_paciente) {
-            this.correo_paciente = correo_paciente;
+            Paciente.correo_paciente = correo_paciente;
         }
 
         public String getContraseña_paciente() {

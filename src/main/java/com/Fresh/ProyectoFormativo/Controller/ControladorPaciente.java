@@ -2,6 +2,8 @@ package com.Fresh.ProyectoFormativo.Controller;
 
 
 import com.Fresh.ProyectoFormativo.Entity.Paciente;
+import com.Fresh.ProyectoFormativo.Repository.PacienteRepo;
+import com.Fresh.ProyectoFormativo.Service.PacienteService;
 import com.Fresh.ProyectoFormativo.Service.PacienteServiceIMPL.PacienteServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,10 @@ import java.util.stream.Collectors;
 @RequestMapping("FreshSmile")
 public class ControladorPaciente {
 
+    PacienteService pacienteService = new PacienteServiceIMPL(); // Crea una instancia de PacienteService
+    @Autowired
+    private PacienteRepo pacienteRepo;
+
     @Autowired
     private PacienteServiceIMPL impl;
     @GetMapping("ConsultarPacientes")
@@ -31,15 +37,47 @@ public class ControladorPaciente {
 
 
 
-    @PostMapping
-    @RequestMapping(value = "CrearPacientes",method = RequestMethod.POST)
-    public ResponseEntity<?>CrearPacientes(@RequestBody Paciente paciente){
-        Paciente PacientesCreado=this.impl.CrearPaciente(paciente);
+    @PostMapping("/CrearPacientes")
+    public ResponseEntity<?> crearPaciente(@RequestBody Paciente paciente) {
+        boolean valid = validarCredenciales(paciente.getCorreo_paciente(), paciente.getContraseña_paciente());
+        if (!valid) {
+            return ResponseEntity.badRequest().body("Correo o contraseña inválidos");
+        }
+
+        // Verificar si el correo y la contraseña coinciden con los datos almacenados en la base de datos
+        Paciente pacienteEncontrado = pacienteRepo.findByCorreoPacienteAndContraseñaPaciente(paciente.getCorreo_paciente(), paciente.getContraseña_paciente());
+        if (pacienteEncontrado == null) {
+            return ResponseEntity.badRequest().body("Correo o contraseña incorrectos");
+        }
+
+        Paciente pacienteCreado = this.impl.CrearPaciente(paciente);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Paciente creado con éxito");
-        response.put("pacienteCreado", PacientesCreado);
+        response.put("pacienteCreado", pacienteCreado);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+
+
+    @PostMapping("/login")
+    public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
+        // Verificar si las credenciales son válidas
+        if (validarCredenciales(correo, contraseña)) {
+            // Las credenciales son válidas
+            return ResponseEntity.ok("Inicio de sesión exitoso");
+        } else {
+            // Las credenciales son incorrectas
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
+        }
+    }
+
+    private boolean validarCredenciales(String correo, String contraseña) {
+        // Buscar el paciente por correo en el repositorio
+        Paciente paciente = pacienteRepo.findByCorreoPacienteAndContraseñaPaciente(correo, contraseña);
+        return paciente != null;
+    }
+
+
 
     @PutMapping
     @RequestMapping(value = "ModificarPacientes",method = RequestMethod.PUT)

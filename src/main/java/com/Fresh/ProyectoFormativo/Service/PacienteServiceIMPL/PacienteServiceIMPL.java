@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class PacienteServiceIMPL implements PacienteService {
+
     @Autowired
     private PacienteRepo repo;
     @Override
@@ -50,4 +51,10 @@ public class PacienteServiceIMPL implements PacienteService {
     public void actualizarEstadoPaciente(Paciente paciente) {
         entityManager.merge(paciente);
     }
+
+    @Override
+    public Paciente findByCorreoPacienteAndContraseñaPaciente(String correo, String contraseña) {
+        return repo.findByCorreoPacienteAndContraseñaPaciente(correo, contraseña);
+    }
+
 }
