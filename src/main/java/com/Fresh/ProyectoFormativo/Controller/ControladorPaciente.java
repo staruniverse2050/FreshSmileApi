@@ -39,17 +39,6 @@ public class ControladorPaciente {
 
     @PostMapping("/CrearPacientes")
     public ResponseEntity<?> crearPaciente(@RequestBody Paciente paciente) {
-        boolean valid = validarCredenciales(paciente.getCorreo(), paciente.getContraseña());
-        if (!valid) {
-            return ResponseEntity.badRequest().body("Correo o contraseña inválidos");
-        }
-
-        // Verificar si el correo y la contraseña coinciden con los datos almacenados en la base de datos
-        Paciente pacienteEncontrado = pacienteRepo.findByCorreoAndContraseña(paciente.getCorreo(), paciente.getContraseña());
-        if (pacienteEncontrado == null) {
-            return ResponseEntity.badRequest().body("Correo o contraseña incorrectos");
-        }
-
         Paciente pacienteCreado = this.impl.CrearPaciente(paciente);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Paciente creado con éxito");

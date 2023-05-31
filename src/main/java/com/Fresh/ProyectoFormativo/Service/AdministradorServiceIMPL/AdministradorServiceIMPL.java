@@ -24,7 +24,6 @@ private AdministradorRepo repo;
 
     @Override
     public Administrador CrearAdministrador(Administrador administrador) {
-        administrador.setNumero_documento_uadministrador(administrador.getNumero_documento_uadministrador());
         return this.repo.save(administrador);
     }
 

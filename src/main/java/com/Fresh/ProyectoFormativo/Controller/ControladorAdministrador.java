@@ -45,16 +45,6 @@ public class ControladorAdministrador {
     @PostMapping
     @RequestMapping(value = "/CrearAdministradores",method = RequestMethod.POST)
     public ResponseEntity<?>CrearAdministradores(@RequestBody Administrador administrador){
-        boolean valid = validarCredenciales(administrador.getCorreo(), administrador.getContraseña());
-        if (!valid) {
-            return ResponseEntity.badRequest().body("Correo o contraseña inválidos");
-        }
-
-        // Verificar si el correo y la contraseña coinciden con los datos almacenados en la base de datos
-        Administrador administradorEncontrado = administradorRepo.findByCorreoAndContraseña(administrador.getCorreo(), administrador.getContraseña());
-        if (administradorEncontrado == null) {
-            return ResponseEntity.badRequest().body("Correo o contraseña incorrectos");
-        }
         Administrador AdministradorCreado=this.impl.CrearAdministrador(administrador);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Administrador creado con éxito");
