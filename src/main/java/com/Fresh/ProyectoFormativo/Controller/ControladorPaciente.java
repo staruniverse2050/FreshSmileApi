@@ -59,7 +59,7 @@ public class ControladorPaciente {
 
 
 
-    @PostMapping("/login")
+    @PostMapping("/loginPaciente")
     public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
         // Verificar si las credenciales son válidas
         boolean valid = validarCredenciales(correo, contraseña);

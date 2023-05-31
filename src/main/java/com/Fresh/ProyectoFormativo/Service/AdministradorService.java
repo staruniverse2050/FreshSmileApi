@@ -1,6 +1,7 @@
 package com.Fresh.ProyectoFormativo.Service;
 
 import com.Fresh.ProyectoFormativo.Entity.Administrador;
+import com.Fresh.ProyectoFormativo.Entity.Paciente;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface AdministradorService {
     public Administrador ModificarAdministrador(Administrador administrador);
     public Administrador BuscarAdministrador(int id);
     public void EliminarAdministrador(int id);
+    Administrador BuscarCredenciales(String correo, String contraseña);
+
 }

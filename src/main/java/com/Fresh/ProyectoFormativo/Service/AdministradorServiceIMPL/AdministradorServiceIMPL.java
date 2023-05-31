@@ -2,6 +2,7 @@ package com.Fresh.ProyectoFormativo.Service.AdministradorServiceIMPL;
 
 
 import com.Fresh.ProyectoFormativo.Entity.Administrador;
+import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import com.Fresh.ProyectoFormativo.Repository.AdministradorRepo;
 import com.Fresh.ProyectoFormativo.Service.AdministradorService;
 import jakarta.persistence.EntityManager;
@@ -47,4 +48,10 @@ private AdministradorRepo repo;
     public void actualizarEstadoAdministrador(Administrador administrador) {
         entityManager.merge(administrador);
     }
+
+    @Override
+    public Administrador BuscarCredenciales(String correo, String contraseña) {
+        return repo.findByCorreoAndContraseña(correo, contraseña);
+    }
+
 }
