@@ -22,7 +22,6 @@ public class PacienteServiceIMPL implements PacienteService {
 
     @Override
     public Paciente CrearPaciente(Paciente paciente) {
-       paciente.setNumero_documento_paciente( paciente.getNumero_documento_paciente());
         return this.repo.save(paciente);
     }
 

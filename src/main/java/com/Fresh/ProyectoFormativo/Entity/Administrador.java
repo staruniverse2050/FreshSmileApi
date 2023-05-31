@@ -28,10 +28,10 @@ public class Administrador {
     private BigInteger telefono_uadministrador;
 
     @Column(name = "correo_uadministrador")
-    private static String correo_uadministrador;
+    private String correo;
 
     @Column(name = "contraseña_uadministrador")
-    private static String contraseña_uadministrador;
+    private String contraseña;
     @Column(name = "Estado")
     private boolean Estado;
 
@@ -94,21 +94,22 @@ public class Administrador {
         this.telefono_uadministrador = telefono_uadministrador;
     }
 
-    public static String getCorreo_uadministrador() {
-        return correo_uadministrador;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setCorreo_uadministrador(String correo_uadministrador) {
-        this.correo_uadministrador = correo_uadministrador;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public static String getContraseña_uadministrador() {
-        return contraseña_uadministrador;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setContraseña_uadministrador(String contraseña_uadministrador) {
-        this.contraseña_uadministrador = contraseña_uadministrador;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
+
     public Administrador() {
         this.fecha_registro = LocalDateTime.now();
         this.Estado = true;
