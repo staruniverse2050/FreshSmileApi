@@ -25,7 +25,7 @@ public class EspecialistaIMPL implements EspecialistaService {
 
     @Override
     public Especialistas createEspecialst(Especialistas newEspecialist) {
-        return this.repo.insert(newEspecialist);
+        return this.repo.save(newEspecialist);
     }
 
     @Override
@@ -52,5 +52,18 @@ public class EspecialistaIMPL implements EspecialistaService {
         oldComents.add(newComent);
         oldEspecialist.setComentarios(oldComents);
         return this.repo.save(oldEspecialist);
+    }
+
+    @Override
+    public Especialistas voteEspecialist(Number vote, String id) {
+        Especialistas especialistasForVote = this.repo.findById(id).get();
+        List<Number> actualVotes = especialistasForVote.getRegistroVotaciones();
+        actualVotes.add(vote);
+        var voteWrapper = new Object(){ Number voteCount = 0; };
+        actualVotes.forEach(singleVote -> voteWrapper.voteCount = (int)singleVote + (int)voteWrapper.voteCount );
+        voteWrapper.voteCount = (int)voteWrapper.voteCount / actualVotes.size();
+        especialistasForVote.setRegistroVotaciones(actualVotes);
+        especialistasForVote.setValoracion(voteWrapper.voteCount.doubleValue());
+        return this.repo.save(especialistasForVote);
     }
 }

@@ -1,6 +1,13 @@
 package com.Fresh.ProyectoFormativo.Documents;
 
+import lombok.AllArgsConstructor;
+
 public class Comentarios {
+    public Comentarios(String Comentario, String NombreUsuario) {
+        this.Comentario = Comentario;
+        this.NombreUsuario = NombreUsuario;
+    }
+
     public String getComentario() {
         return Comentario;
     }
@@ -16,7 +23,6 @@ public class Comentarios {
     public void setNombreUsuario(String nombreUsuario) {
         NombreUsuario = nombreUsuario;
     }
-
 
     private String Comentario;
     private String NombreUsuario;

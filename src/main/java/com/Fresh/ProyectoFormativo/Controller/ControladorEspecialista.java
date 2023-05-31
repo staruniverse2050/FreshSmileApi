@@ -1,5 +1,6 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
+import com.Fresh.ProyectoFormativo.Documents.Comentarios;
 import com.Fresh.ProyectoFormativo.Documents.Especialistas;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +32,34 @@ public class ControladorEspecialista {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Especialistas> PutChangedEspecialist(@RequestBody Especialistas changedEspecialist, String id){
+    public ResponseEntity<Especialistas> PutChangedEspecialist(@RequestBody Especialistas changedEspecialist, @PathVariable String id){
         Especialistas updatedEspecialist = this.especialistaService.updateEspecialist(changedEspecialist, id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedEspecialist);
     }
 
+    @PatchMapping("/comment/{id}")
+    public ResponseEntity<Especialistas> PatchCommentEspecialist(@RequestBody Comentarios newComent, @PathVariable String id){
+        Especialistas commentedEspecialist = this.especialistaService.comentEspecialist(newComent, id);
+        return ResponseEntity.status(HttpStatus.OK).body(commentedEspecialist);
+    }
+
+    @PatchMapping("/vote/{id}")
+    public ResponseEntity<Especialistas> PatchVoteEspecialist(@RequestParam String vote, @PathVariable String id){
+        Especialistas votedEspecialist = this.especialistaService.voteEspecialist(Integer.parseInt(vote), id);
+        return ResponseEntity.status(HttpStatus.OK).body(votedEspecialist);
+    }
+
+    private class DeleteResult{
+        public String Message;
+        public DeleteResult(String message){
+            this.Message = message;
+        }
+    }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> DeleteEspecialist(String id){
+    public ResponseEntity<DeleteResult> DeleteEspecialist(@PathVariable String id){
         this.especialistaService.deleteEspecialst(id);
-        return ResponseEntity.ok("Especialista eliminado correctamente");
+        return ResponseEntity.ok(new DeleteResult("Especialista eliminado correctamente"));
     }
 
 }

@@ -12,4 +12,5 @@ public interface EspecialistaService {
     Especialistas updateEspecialist(Especialistas newEspecialist,String id);
     void deleteEspecialst(String id);
     Especialistas comentEspecialist(Comentarios newComent, String id);
+    Especialistas voteEspecialist(Number vote, String id);
 }
