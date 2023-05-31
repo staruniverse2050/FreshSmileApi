@@ -39,13 +39,13 @@ public class ControladorPaciente {
 
     @PostMapping("/CrearPacientes")
     public ResponseEntity<?> crearPaciente(@RequestBody Paciente paciente) {
-        boolean valid = validarCredenciales(paciente.getCorreo_paciente(), paciente.getContraseña_paciente());
+        boolean valid = validarCredenciales(paciente.getCorreo(), paciente.getContraseña());
         if (!valid) {
             return ResponseEntity.badRequest().body("Correo o contraseña inválidos");
         }
 
         // Verificar si el correo y la contraseña coinciden con los datos almacenados en la base de datos
-        Paciente pacienteEncontrado = pacienteRepo.findByCorreoPacienteAndContraseñaPaciente(paciente.getCorreo_paciente(), paciente.getContraseña_paciente());
+        Paciente pacienteEncontrado = pacienteRepo.findByCorreoAndContraseña(paciente.getCorreo(), paciente.getContraseña());
         if (pacienteEncontrado == null) {
             return ResponseEntity.badRequest().body("Correo o contraseña incorrectos");
         }
@@ -73,9 +73,10 @@ public class ControladorPaciente {
 
     private boolean validarCredenciales(String correo, String contraseña) {
         // Buscar el paciente por correo en el repositorio
-        Paciente paciente = pacienteRepo.findByCorreoPacienteAndContraseñaPaciente(correo, contraseña);
+        Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
         return paciente != null;
     }
+
 
 
 

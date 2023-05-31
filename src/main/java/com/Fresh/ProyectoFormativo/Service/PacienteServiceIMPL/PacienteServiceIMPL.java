@@ -53,8 +53,8 @@ public class PacienteServiceIMPL implements PacienteService {
     }
 
     @Override
-    public Paciente findByCorreoPacienteAndContraseñaPaciente(String correo, String contraseña) {
-        return repo.findByCorreoPacienteAndContraseñaPaciente(correo, contraseña);
+    public Paciente BuscarCredenciales(String correo, String contraseña) {
+        return repo.findByCorreoAndContraseña(correo, contraseña);
     }
 
 }

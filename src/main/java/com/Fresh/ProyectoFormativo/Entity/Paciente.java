@@ -26,11 +26,13 @@ import java.time.LocalDateTime;
         @Column(name = "telefono_paciente")
         private BigInteger telefono_paciente;
 
-        @Column(name = "correo_paciente")
-        private static String correo_paciente;
+    @Column(name = "correo_paciente")
+    private String correo;
 
-        @Column(name = "contraseña_paciente")
-        private String contraseña_paciente;
+    @Column(name = "contrasena_paciente")
+    private String contraseña;
+
+
         @Column(name = "fecha_registro_paciente")
         private LocalDateTime fecha_registro_paciente;
         @Column(name = "Estado")
@@ -106,21 +108,22 @@ import java.time.LocalDateTime;
             this.telefono_paciente = telefono_paciente;
         }
 
-        public static String getCorreo_paciente() {
-            return correo_paciente;
-        }
+    public String getCorreo() {
+        return correo;
+    }
 
-        public void setCorreo_paciente(String correo_paciente) {
-            Paciente.correo_paciente = correo_paciente;
-        }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
-        public String getContraseña_paciente() {
-            return contraseña_paciente;
-        }
+    public String getContraseña() {
+        return contraseña;
+    }
 
-        public void setContraseña_paciente(String contraseña_paciente) {
-            this.contraseña_paciente = contraseña_paciente;
-        }
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
     public String getEstado() {
         if (Estado) {
             return "Activo";
