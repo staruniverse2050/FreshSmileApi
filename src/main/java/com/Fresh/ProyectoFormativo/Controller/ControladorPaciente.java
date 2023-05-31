@@ -62,7 +62,8 @@ public class ControladorPaciente {
     @PostMapping("/login")
     public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
         // Verificar si las credenciales son válidas
-        if (validarCredenciales(correo, contraseña)) {
+        boolean valid = validarCredenciales(correo, contraseña);
+        if (valid) {
             // Las credenciales son válidas
             return ResponseEntity.ok("Inicio de sesión exitoso");
         } else {
@@ -71,12 +72,12 @@ public class ControladorPaciente {
         }
     }
 
+
     private boolean validarCredenciales(String correo, String contraseña) {
-        // Buscar el paciente por correo en el repositorio
+        // Buscar el paciente por correo y contraseña en el repositorio
         Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
         return paciente != null;
     }
-
 
 
 

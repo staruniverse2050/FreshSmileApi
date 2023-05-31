@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
     @Column(name = "correo_paciente")
     private String correo;
 
-    @Column(name = "contrasena_paciente")
+    @Column(name = "contraseña_paciente")
     private String contraseña;
 
 
