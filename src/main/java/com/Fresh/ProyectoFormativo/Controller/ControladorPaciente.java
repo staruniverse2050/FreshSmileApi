@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("FreshSmile")
+@RequestMapping("/FreshSmile")
 public class ControladorPaciente {
 
     PacienteService pacienteService = new PacienteServiceIMPL(); // Crea una instancia de PacienteService
@@ -25,7 +25,7 @@ public class ControladorPaciente {
 
     @Autowired
     private PacienteServiceIMPL impl;
-    @GetMapping("ConsultarPacientes")
+    @GetMapping("/ConsultarPacientes")
     public ResponseEntity<List<Paciente>> consultarPacientesActivos() {
         List<Paciente> pacientesActivos = this.impl.ConsultarPaciente()
                 .stream()
@@ -71,7 +71,7 @@ public class ControladorPaciente {
 
 
     @PutMapping
-    @RequestMapping(value = "ModificarPacientes",method = RequestMethod.PUT)
+    @RequestMapping(value = "/ModificarPacientes",method = RequestMethod.PUT)
     public ResponseEntity<?>ModificarPacientes(@RequestBody Paciente paciente){
         Paciente PacienteModificado=this.impl.ModificarPaciente(paciente);
         String message = "Paciente modificado con éxito.";
@@ -81,7 +81,7 @@ public class ControladorPaciente {
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("ConsultarPacientesOff")
+    @GetMapping("/ConsultarPacientesOff")
     public ResponseEntity<List<Paciente>> listarPacientesDesactivados() {
         List<Paciente> pacientesDesactivados = impl.ConsultarPaciente().stream()
                 .filter(paciente -> paciente.getEstado().equalsIgnoreCase("Desactivo"))
@@ -90,7 +90,7 @@ public class ControladorPaciente {
     }
 
 
-    @GetMapping("BuscarPacientes/{id}")
+    @GetMapping("/BuscarPacientes/{id}")
     public ResponseEntity<?> buscarPaciente(@PathVariable int id) {
         Paciente paciente = impl.BuscarPaciente(id);
         if (paciente == null) {
@@ -105,7 +105,7 @@ public class ControladorPaciente {
     }
 
 
-    @DeleteMapping("EliminarPacientes/{id}")
+    @DeleteMapping("/EliminarPacientes/{id}")
     public ResponseEntity<Map<String, Object>> desactivarPaciente(@PathVariable int id) {
         Paciente pacienteDesactivado = impl.BuscarPaciente(id);
         pacienteDesactivado.setEstado(false); // Establecer el estado del paciente como inactivo
@@ -117,7 +117,7 @@ public class ControladorPaciente {
 
         return ResponseEntity.ok().body(response);
     }
-    @PutMapping("ActivarPaciente/{id}")
+    @PutMapping("/ActivarPaciente/{id}")
     public ResponseEntity<Map<String, Object>> activarPaciente(@PathVariable int id) {
         Paciente pacienteActivado = impl.BuscarPaciente(id);
         pacienteActivado.setEstado(true); // Establecer el estado del paciente como activo
