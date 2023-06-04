@@ -1,7 +1,9 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
 import com.Fresh.ProyectoFormativo.Entity.Disponibilidad;
+import com.Fresh.ProyectoFormativo.Entity.Tipo_cita;
 import com.Fresh.ProyectoFormativo.Service.DisponibilidadService;
+import com.Fresh.ProyectoFormativo.Service.Tipo_citaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +17,13 @@ public class ControladorDisponibilidad {
     private final DisponibilidadService disponibilidadService;
 
     @Autowired
-    public ControladorDisponibilidad(DisponibilidadService disponibilidadService) {
+    public  ControladorDisponibilidad (DisponibilidadService disponibilidadService) {
         this.disponibilidadService = disponibilidadService;
     }
-
-    @GetMapping("/ConsultarDisponibilidades")
-    public ResponseEntity<List<Disponibilidad>> consultarDisponibilidades() {
-        List<Disponibilidad> disponibilidad = disponibilidadService.ConsultarDisponibilidades();
-        return ResponseEntity.ok(disponibilidad);
+    @GetMapping("/Consultardisponibilidades")
+    public ResponseEntity<List<Disponibilidad>> consultardisponibilidades() {
+        List<Disponibilidad> disponibilidades = disponibilidadService.ConsultarDisponibilidades();
+        return ResponseEntity.ok(disponibilidades);
     }
 
     @PostMapping("/CrearDisponibilidad")
@@ -33,16 +34,14 @@ public class ControladorDisponibilidad {
     }
 
     @PutMapping("/ModificarDisponibilidad/{id}")
-    public ResponseEntity<Disponibilidad> modificarDisponibilidad(@PathVariable int id, @RequestBody Disponibilidad disponibilidad) {
+    public ResponseEntity<Disponibilidad> modificarDisponbilidad(@PathVariable int id, @RequestBody Disponibilidad disponibilidad) {
         Disponibilidad disponibilidadExistente = disponibilidadService.BuscarDisponibilidad(id);
-        // Actualizar los campos de la disponibilidad según sea necesario
         disponibilidadExistente.setHoras_disponibles(disponibilidad.getHoras_disponibles());
-        // Actualizar otros campos de la disponibilidad según sea necesario
         Disponibilidad disponibilidadActualizada = disponibilidadService.ModificarDisponibilidad(disponibilidadExistente);
         return ResponseEntity.ok(disponibilidadActualizada);
     }
 
-    @DeleteMapping("/EliminarDisponibilidad/{id}")
+    @DeleteMapping("/EliminarDisponbilidad/{id}")
     public ResponseEntity<String> eliminarDisponibilidad(@PathVariable int id) {
         disponibilidadService.EliminarDisponibilidad(id);
         String mensaje = "Disponibilidad eliminada exitosamente";

@@ -22,6 +22,7 @@ public class Disponibilidad {
 
     @Column(name = "horas_disponibles")
     private String horas_disponibles;
+
     public int getId_disponibilidad() {
         return id_disponibilidad;
     }

@@ -24,7 +24,7 @@ public class Codigo_administrador {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public static void setCodigo(String codigo) {
+        Codigo_administrador.codigo = codigo;
     }
 }
