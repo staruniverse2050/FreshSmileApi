@@ -84,11 +84,11 @@ import java.time.LocalDateTime;
         this.Estado = true;
     }
 
-    public void setFecha_registro_administrador(LocalDateTime fecha_registro) {
+    public void setFecha_registro_paciente(LocalDateTime fecha_registro) {
         this.fecha_registro_paciente = fecha_registro;
     }
 
-    public LocalDateTime getFecha_registro_administrador() {
+    public LocalDateTime getFecha_registro_paciente() {
         return fecha_registro_paciente;
     }
 

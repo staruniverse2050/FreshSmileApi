@@ -22,19 +22,13 @@ public class Citas {
     @Column(name = "id_administradorcita")
     private int id_administradorcita;
 
-    @Column(name = "fecha_cita")
-    private Date fecha_cita;
+    @Column(name = "id_disponibilidad")
+    private int id_disponibilidad;
 
-    @Column(name = "hora_cita")
-    private LocalTime hora_cita;
-
-    @Column(name = "tipo_cita")
-    private String tipo_cita;
+    @Column(name = "id_tipo_citas")
+    private int  id_tipo_citas;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "costo")
-    private BigDecimal costo;
-
 
     public int getId_cita() {
         return id_cita;
@@ -60,28 +54,20 @@ public class Citas {
         this.id_administradorcita = id_administradorcita;
     }
 
-    public Date getFecha_cita() {
-        return fecha_cita;
+    public int getId_disponibilidad() {
+        return id_disponibilidad;
     }
 
-    public void setFecha_cita(Date fecha_cita) {
-        this.fecha_cita = fecha_cita;
+    public void setId_disponibilidad(int id_disponibilidad) {
+        this.id_disponibilidad = id_disponibilidad;
     }
 
-    public LocalTime getHora_cita() {
-        return hora_cita;
+    public int getId_tipo_citas() {
+        return id_tipo_citas;
     }
 
-    public void setHora_cita(LocalTime hora_cita) {
-        this.hora_cita = hora_cita;
-    }
-
-    public String getTipo_cita() {
-        return tipo_cita;
-    }
-
-    public void setTipo_cita(String tipo_cita) {
-        this.tipo_cita = tipo_cita;
+    public void setId_tipo_citas(int id_tipo_citas) {
+        this.id_tipo_citas = id_tipo_citas;
     }
 
     public String getEstado() {
@@ -92,11 +78,4 @@ public class Citas {
         this.estado = estado;
     }
 
-    public BigDecimal getCosto() {
-        return costo;
-    }
-
-    public void setCosto(BigDecimal costo) {
-        this.costo = costo;
-    }
 }

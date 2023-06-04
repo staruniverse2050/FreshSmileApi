@@ -18,7 +18,7 @@ public class Disponibilidad {
     private int id_administrador;
 
     @Column(name = "fecha_disponibilidad")
-    private Date fecha_disponibilidad;
+    private String fecha_disponibilidad;
 
     @Column(name = "horas_disponibles")
     private String horas_disponibles;
@@ -38,11 +38,11 @@ public class Disponibilidad {
         this.id_administrador = id_administrador;
     }
 
-    public Date getFecha_disponibilidad() {
+    public String getFecha_disponibilidad() {
         return fecha_disponibilidad;
     }
 
-    public void setFecha_disponibilidad(Date fecha_disponibilidad) {
+    public void setFecha_disponibilidad(String fecha_disponibilidad) {
         this.fecha_disponibilidad = fecha_disponibilidad;
     }
 

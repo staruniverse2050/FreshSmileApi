@@ -1,9 +1,7 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
 import com.Fresh.ProyectoFormativo.Entity.Agenda;
-import com.Fresh.ProyectoFormativo.Entity.Citas;
 import com.Fresh.ProyectoFormativo.Service.AgendaService;
-import com.Fresh.ProyectoFormativo.Service.CitasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +38,8 @@ public class ControladorAgenda {
         // Update the fields of the appointment as necessary
         agendaExistente.setNumero_documento(agenda.getNumero_documento());
         // Update other fields of the appointment as necessary
-        Agenda citaActualizada = agendaService.ModificarAgenda(agendaExistente);
-        return ResponseEntity.ok(citaActualizada);
+        Agenda agendaActualizada = agendaService.ModificarAgenda(agendaExistente);
+        return ResponseEntity.ok(agendaActualizada);
     }
 
     @DeleteMapping("/EliminarAgenda/{id}")

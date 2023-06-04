@@ -36,8 +36,7 @@ public class ControladorCitas {
     public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
         Citas citaExistente = citasService.BuscarCita(id);
         // Update the fields of the appointment as necessary
-        citaExistente.setFecha_cita(citas.getFecha_cita());
-        citaExistente.setHora_cita(citas.getHora_cita());
+        citaExistente.setEstado(citas.getEstado());
         // Update other fields of the appointment as necessary
         Citas citaActualizada = citasService.ModificarCita(citaExistente);
         return ResponseEntity.ok(citaActualizada);

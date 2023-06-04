@@ -21,17 +21,18 @@ public class Agenda {
     @Column(name = "numero_documento")
     private String numero_documento;
 
-    @Column(name = "nombre")
+    @Column(name = "nombres")
     private String nombre;
 
-    @Column(name = "telefono")
-    private String telefono;
+    @Column(name = "apellidos")
+    private String apellidos;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "id_disponibilidad")
+    private int id_disponibilidad;
 
-    @Column(name = "tipo_cita")
-    private String tipo_cita;
+    @Column(name = "id_tipo_cita")
+    private int id_tipo_cita;
+
 
     @Column(name = "fecha_creacion")
     private LocalDateTime fecha_creacion;
@@ -68,30 +69,29 @@ public class Agenda {
         this.nombre = nombre;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public String getEmail() {
-        return email;
+    public int getId_disponibilidad() {
+        return id_disponibilidad;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId_disponibilidad(int id_disponibilidad) {
+        this.id_disponibilidad = id_disponibilidad;
     }
 
-    public String getTipo_cita() {
-        return tipo_cita;
+    public int getId_tipo_cita() {
+        return id_tipo_cita;
     }
 
-    public void setTipo_cita(String tipo_cita) {
-        this.tipo_cita = tipo_cita;
+    public void setId_tipo_cita(int id_tipo_cita) {
+        this.id_tipo_cita = id_tipo_cita;
     }
-
 
     public Agenda() {
         this.fecha_creacion = LocalDateTime.now();

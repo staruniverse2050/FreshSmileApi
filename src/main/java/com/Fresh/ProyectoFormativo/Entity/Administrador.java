@@ -35,8 +35,11 @@ public class Administrador {
     @Column(name = "Estado")
     private boolean Estado;
 
-    @Column(name = "fecha_registro ")
-    private LocalDateTime fecha_registro ;
+    @Column(name = "fecha_registro_uadministrador ")
+    private LocalDateTime fecha_registro_uadministrador ;
+
+    @Column(name = "Especialidad")
+    private String Especialidad;
 
     public int getId_uadministrador() {
         return id_uadministrador;
@@ -111,17 +114,25 @@ public class Administrador {
     }
 
     public Administrador() {
-        this.fecha_registro = LocalDateTime.now();
+        this.fecha_registro_uadministrador = LocalDateTime.now();
         this.Estado = true;
     }
 
 
-    public void setFecha_registro_administrador(LocalDateTime fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public LocalDateTime getFecha_registro_uadministrador() {
+        return fecha_registro_uadministrador;
     }
 
-    public LocalDateTime getFecha_registro_administrador() {
-        return fecha_registro;
+    public String getEspecialidad() {
+        return Especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        Especialidad = especialidad;
+    }
+
+    public void setFecha_registro_uadministrador(LocalDateTime fecha_registro_uadministrador) {
+        this.fecha_registro_uadministrador = fecha_registro_uadministrador;
     }
 
     public String getEstado() {
