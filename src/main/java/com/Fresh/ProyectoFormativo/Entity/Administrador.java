@@ -32,8 +32,7 @@ public class Administrador {
 
     @Column(name = "contraseña_uadministrador")
     private String contraseña;
-
-
+    @Column(name = "Estado")
     private boolean Estado;
 
     @Column(name = "fecha_registro ")

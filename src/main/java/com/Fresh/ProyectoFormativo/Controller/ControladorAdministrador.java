@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/FreshSmile")
 public class ControladorAdministrador {
 
-    AdministradorService administradorService = new AdministradorServiceIMPL(); // Crea una instancia de PacienteService
+    AdministradorService administradorService = new AdministradorServiceIMPL();
 
     @Autowired
     private AdministradorRepo administradorRepo;
@@ -39,6 +39,7 @@ public class ControladorAdministrador {
 
         return ResponseEntity.ok(administradoresActivos);
     }
+
 
 
 

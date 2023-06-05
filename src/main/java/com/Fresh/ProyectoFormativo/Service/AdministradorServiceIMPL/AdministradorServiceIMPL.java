@@ -14,8 +14,8 @@ import java.util.List;
 
 @Service
 public class AdministradorServiceIMPL implements AdministradorService {
-@Autowired
-private AdministradorRepo repo;
+    @Autowired
+    private AdministradorRepo repo;
 
     @Override
     public List<Administrador> ConsultarAdministrador() {
