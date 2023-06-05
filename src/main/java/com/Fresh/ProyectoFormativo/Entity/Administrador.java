@@ -37,6 +37,8 @@ public class Administrador {
 
     @Column(name = "fecha_registro ")
     private LocalDateTime fecha_registro ;
+    @Column(name = "Especialidad")
+    private int Especialidad;
 
     public int getId_uadministrador() {
         return id_uadministrador;
@@ -134,5 +136,13 @@ public class Administrador {
 
     public void setEstado(boolean Estado) {
         this.Estado = Estado;
+    }
+
+    public int getEspecialidad() {
+        return Especialidad;
+    }
+
+    public void setEspecialidad(int especialidad) {
+        Especialidad = especialidad;
     }
 }
