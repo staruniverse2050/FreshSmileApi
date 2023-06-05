@@ -54,22 +54,21 @@ public class ControladorAdministrador {
     @PostMapping("/loginAdministrador")
     public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
         // Verificar si las credenciales son válidas
-        boolean valid = validarCredenciales(correo, contraseña);
-        if (valid) {
+        Administrador administrador = administradorRepo.findByCorreoAndContraseña(correo, contraseña);
+        if (administrador != null) {
             // Las credenciales son válidas
             return ResponseEntity.ok("Inicio de sesión exitoso");
         } else {
             // Las credenciales son incorrectas
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
+
         }
     }
-
-
     private boolean validarCredenciales(String correo, String contraseña) {
-        // Buscar el paciente por correo y contraseña en el repositorio
         Administrador administrador = administradorRepo.findByCorreoAndContraseña(correo, contraseña);
         return administrador != null;
     }
+
 
 
     @PutMapping

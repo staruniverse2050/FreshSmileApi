@@ -51,8 +51,8 @@ public class ControladorPaciente {
     @PostMapping("/loginPaciente")
     public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
         // Verificar si las credenciales son válidas
-        boolean valid = validarCredenciales(correo, contraseña);
-        if (valid) {
+        Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
+        if (paciente != null) {
             // Las credenciales son válidas
             return ResponseEntity.ok("Inicio de sesión exitoso");
         } else {
@@ -60,7 +60,6 @@ public class ControladorPaciente {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
         }
     }
-
 
     private boolean validarCredenciales(String correo, String contraseña) {
         // Buscar el paciente por correo y contraseña en el repositorio
