@@ -20,6 +20,7 @@ public class Especialistas {
     private String Telefono;
     private String Años_Experiencia;
     private String Especialidad;
+    private String foto_perfil;
     private Double Valoracion;
     private List<Number> registroVotaciones;
     private List<Comentarios> Comentarios;
