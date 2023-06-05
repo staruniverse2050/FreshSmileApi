@@ -1,5 +1,6 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
+import com.Fresh.ProyectoFormativo.Entity.Citas;
 import com.Fresh.ProyectoFormativo.Entity.Codigo_administrador;
 import com.Fresh.ProyectoFormativo.Service.Codigo_administradorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,13 @@ public class ControladorCodigo_administrador {
     }
 
     @PutMapping("/ModificarCodigo/{id}")
-    public ResponseEntity<Codigo_administrador> ModificarCodigo(@PathVariable int id, @RequestBody Codigo_administrador codigo_administrador) {
+    public ResponseEntity<Codigo_administrador> modificarCodigo(@PathVariable int id, @RequestBody Codigo_administrador codigoAdministrador) {
         Codigo_administrador codigoExistente = codigoAdministradorService.BuscarCodigo(id);
         // Update the fields of the appointment as necessary
-        codigoExistente.setCodigo(Codigo_administrador.getCodigo());
+        codigoExistente.setCodigo(codigoAdministrador.getCodigo());
         // Update other fields of the appointment as necessary
-        Codigo_administrador codigoActualizado = codigoAdministradorService.ModificarCodigo(codigoExistente);
-        return ResponseEntity.ok(codigoActualizado);
+        Codigo_administrador codigoActualizada = codigoAdministradorService.ModificarCodigo(codigoExistente);
+        return ResponseEntity.ok(codigoActualizada);
     }
 
 }

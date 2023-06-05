@@ -10,7 +10,7 @@ public class Codigo_administrador {
     @Column(name = "id_codigo")
     private int id_codigo;
     @Column(name = "codigo")
-    private static String codigo;
+    private String codigo;
 
     public int getId_codigo() {
         return id_codigo;
@@ -20,11 +20,11 @@ public class Codigo_administrador {
         this.id_codigo = id_codigo;
     }
 
-    public static String getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public static void setCodigo(String codigo) {
-        Codigo_administrador.codigo = codigo;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }

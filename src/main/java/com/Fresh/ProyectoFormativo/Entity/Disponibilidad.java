@@ -17,8 +17,8 @@ public class Disponibilidad {
     @Column(name = "id_administrador")
     private int id_administrador;
 
-    @Column(name = "fecha_disponibilidad")
-    private String fecha_disponibilidad;
+    @Column(name = "fechas_disponibilidad")
+    private String fechas_disponibilidad;
 
     @Column(name = "horas_disponibles")
     private String horas_disponibles;
@@ -39,12 +39,12 @@ public class Disponibilidad {
         this.id_administrador = id_administrador;
     }
 
-    public String getFecha_disponibilidad() {
-        return fecha_disponibilidad;
+    public String getFechas_disponibilidad() {
+        return fechas_disponibilidad;
     }
 
-    public void setFecha_disponibilidad(String fecha_disponibilidad) {
-        this.fecha_disponibilidad = fecha_disponibilidad;
+    public void setFechas_disponibilidad(String fechas_disponibilidad) {
+        this.fechas_disponibilidad = fechas_disponibilidad;
     }
 
     public String getHoras_disponibles() {
