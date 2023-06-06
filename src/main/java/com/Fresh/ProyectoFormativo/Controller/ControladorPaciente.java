@@ -29,7 +29,7 @@ public class ControladorPaciente {
     public ResponseEntity<List<Paciente>> consultarPacientesActivos() {
         List<Paciente> pacientesActivos = this.impl.ConsultarPaciente()
                 .stream()
-                .filter(paciente -> "Activo".equalsIgnoreCase(paciente.getEstado()))
+                .filter(paciente -> paciente.isEstado())
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(pacientesActivos);
@@ -83,7 +83,7 @@ public class ControladorPaciente {
     @GetMapping("/ConsultarPacientesOff")
     public ResponseEntity<List<Paciente>> listarPacientesDesactivados() {
         List<Paciente> pacientesDesactivados = impl.ConsultarPaciente().stream()
-                .filter(paciente -> paciente.getEstado().equalsIgnoreCase("Desactivo"))
+                .filter(paciente -> paciente.isEstado())
                 .collect(Collectors.toList());
         return ResponseEntity.ok                                                                                                                                                              (pacientesDesactivados);
     }
@@ -95,7 +95,7 @@ public class ControladorPaciente {
         if (paciente == null) {
             return ResponseEntity.notFound().build();
         }
-        if (!paciente.getEstado().equalsIgnoreCase("Activo")) {
+        if (!paciente.isEstado()) {
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Este paciente se encuentra innactivo");
             return ResponseEntity.ok(response);

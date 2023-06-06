@@ -1,6 +1,5 @@
 package com.Fresh.ProyectoFormativo;
 
-import com.Fresh.ProyectoFormativo.Repository.EspecialistaRepo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

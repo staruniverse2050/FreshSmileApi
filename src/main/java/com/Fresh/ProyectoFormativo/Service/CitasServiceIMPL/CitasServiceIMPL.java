@@ -1,8 +1,6 @@
 package com.Fresh.ProyectoFormativo.Service.CitasServiceIMPL;
 
-import com.Fresh.ProyectoFormativo.Entity.Agenda;
 import com.Fresh.ProyectoFormativo.Entity.Citas;
-import com.Fresh.ProyectoFormativo.Repository.AgendaRepo;
 import com.Fresh.ProyectoFormativo.Repository.CitasRepo;
 import com.Fresh.ProyectoFormativo.Service.CitasService;
 import org.springframework.beans.factory.annotation.Autowired;
