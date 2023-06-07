@@ -4,12 +4,14 @@ import com.Fresh.ProyectoFormativo.Entity.Codigo_administrador;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 public interface Codigo_administradorRepo extends CrudRepository<Codigo_administrador,Integer> {
     @Procedure("insertarCodigoAdministrador")
-    void newCode(String code);
+    void newCode(Codigo_administrador newCode);
 
     @Procedure("consultarCodigoAdmin")
-    String getCodigo_administrador();
+    List<Codigo_administrador> getCodigo_administrador();
 
     @Procedure("eliminarCodigoAdministrador")
     void deleteCodigo_administrador(String code);

@@ -9,5 +9,6 @@ import java.util.List;
 public interface Codigo_administradorService {
     public List<Codigo_administrador> ConsultarCodigo();
 
-    public Codigo_administrador ModificarCodigo(Codigo_administrador codigoAdministrador);
+    public void EliminarCodigo(String code);
+    public void CrearCodigo(Codigo_administrador code);
 }
