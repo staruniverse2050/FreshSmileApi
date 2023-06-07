@@ -38,5 +38,10 @@ public class PacienteServiceIMPL implements PacienteService {
         return this.repo.deletePacient(id);
     }
 
+    @Override
+    public String changePacientStatus(int Id, boolean estatus) {
+        return this.repo.changePacientStatus(Id, estatus);
+    }
+
 
 }

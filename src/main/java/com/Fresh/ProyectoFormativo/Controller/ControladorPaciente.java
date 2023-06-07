@@ -39,7 +39,7 @@ public class ControladorPaciente {
 
     @PostMapping("/CrearPacientes")
     public ResponseEntity<?> crearPaciente(@RequestBody Paciente paciente) {
-        Paciente pacienteCreado = this.impl.CrearPaciente(paciente);
+        String pacienteCreado = this.impl.CrearPaciente(paciente);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Paciente creado con éxito");
         response.put("pacienteCreado", pacienteCreado);
@@ -72,7 +72,7 @@ public class ControladorPaciente {
     @PutMapping
     @RequestMapping(value = "/ModificarPacientes",method = RequestMethod.PUT)
     public ResponseEntity<?>ModificarPacientes(@RequestBody Paciente paciente){
-        Paciente PacienteModificado=this.impl.ModificarPaciente(paciente);
+        String PacienteModificado=this.impl.ModificarPaciente(paciente);
         String message = "Paciente modificado con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
@@ -116,7 +116,7 @@ public class ControladorPaciente {
 
         return ResponseEntity.ok().body(response);
     }
-    @PutMapping("/ActivarPaciente/{id}")
+    /*@PutMapping("/ActivarPaciente/{id}")
     public ResponseEntity<Map<String, Object>> activarPaciente(@PathVariable int id) {
         Paciente pacienteActivado = impl.BuscarPaciente(id);
         pacienteActivado.setEstado(true); // Establecer el estado del paciente como activo
@@ -127,7 +127,7 @@ public class ControladorPaciente {
         response.put("pacienteActivado", pacienteActivado);
 
         return ResponseEntity.ok().body(response);
-    }
+    }*/
 
 
 

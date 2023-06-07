@@ -17,4 +17,7 @@ public interface PacienteRepo extends CrudRepository<Paciente, Integer> {
 
     @Procedure("EliminarPaciente")
     String deletePacient(int Id);
+
+    @Procedure("CambiarEstadoPaciente")
+    String changePacientStatus(int Id, boolean estatus);
 }

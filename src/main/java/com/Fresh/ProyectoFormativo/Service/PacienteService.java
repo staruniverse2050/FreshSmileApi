@@ -10,4 +10,5 @@ public interface PacienteService {
     String ModificarPaciente(Paciente paciente);
     Paciente BuscarPaciente(int id);
     String EliminarPaciente(int id);
+    String changePacientStatus(int Id, boolean estatus);
 }
