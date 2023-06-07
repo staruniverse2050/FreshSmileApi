@@ -27,7 +27,7 @@ public class ControladorCodigo_administrador {
 
     @PutMapping("/ModificarCodigo/{id}")
     public ResponseEntity<Codigo_administrador> modificarCodigo(@PathVariable int id, @RequestBody Codigo_administrador codigoAdministrador) {
-        Codigo_administrador codigoExistente = codigoAdministradorService.BuscarCodigo(id);
+        Codigo_administrador codigoExistente = codigoAdministradorService.ConsultarCodigo().get(0);
         // Update the fields of the appointment as necessary
         codigoExistente.setCodigo(codigoAdministrador.getCodigo());
         // Update other fields of the appointment as necessary

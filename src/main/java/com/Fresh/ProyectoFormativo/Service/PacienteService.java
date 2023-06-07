@@ -11,5 +11,4 @@ public interface PacienteService {
     Paciente BuscarPaciente(int id);
     void EliminarPaciente(int id);
     void actualizarEstadoPaciente(Paciente paciente);
-    Paciente BuscarCredenciales(String correo, String contraseña);
 }

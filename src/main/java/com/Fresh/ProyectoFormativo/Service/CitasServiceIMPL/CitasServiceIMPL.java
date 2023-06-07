@@ -20,7 +20,7 @@ public class CitasServiceIMPL implements CitasService {
 
     @Override
     public Citas CrearCita(Citas citas) {
-        citas.setEstado(citas.getEstado());
+        citas.setEstado_cita(citas.getEstado_cita());
         return this.repo.save(citas);
     }
 

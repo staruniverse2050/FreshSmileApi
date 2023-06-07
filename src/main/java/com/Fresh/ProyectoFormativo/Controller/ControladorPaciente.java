@@ -48,7 +48,7 @@ public class ControladorPaciente {
 
 
 
-    @PostMapping("/loginPaciente")
+    /*@PostMapping("/loginPaciente")
     public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
         // Verificar si las credenciales son válidas
         Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
@@ -65,7 +65,7 @@ public class ControladorPaciente {
         // Buscar el paciente por correo y contraseña en el repositorio
         Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
         return paciente != null;
-    }
+    }*/
 
 
 

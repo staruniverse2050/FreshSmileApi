@@ -51,10 +51,5 @@ public class PacienteServiceIMPL implements PacienteService {
         entityManager.merge(paciente);
     }
 
-    @Override
-    public Paciente BuscarCredenciales(String correo, String contraseña) {
-        return repo.findByCorreoAndContraseña(correo, contraseña);
-    }
-
 
 }
