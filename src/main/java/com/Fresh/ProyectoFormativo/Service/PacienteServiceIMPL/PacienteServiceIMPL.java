@@ -21,34 +21,21 @@ public class PacienteServiceIMPL implements PacienteService {
     }
 
     @Override
-    public Paciente CrearPaciente(Paciente paciente) {
-        return this.repo.save(paciente);
+    public String CrearPaciente(Paciente paciente) {
+        return this.repo.createPacient(paciente);
     }
 
     @Override
-    public Paciente ModificarPaciente(Paciente paciente) {
-        return this.repo.save(paciente);
+    public String ModificarPaciente(Paciente paciente) {
+        return this.repo.modifyPacient(paciente);
     }
 
     @Override
-    public Paciente BuscarPaciente(int id) {
-        Optional<Paciente> optional = this.repo.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        } else {
-            throw new RuntimeException("Paciente no encontrado con id: " + id);
-        }
-    }
+    public Paciente BuscarPaciente(int id) { return this.repo.findByPacientId(id); }
 
     @Override
-    public void EliminarPaciente(int id) {
-        this.repo.deleteById(id);
-    }
-    @Autowired
-    private EntityManager entityManager;
-    @Transactional
-    public void actualizarEstadoPaciente(Paciente paciente) {
-        entityManager.merge(paciente);
+    public String EliminarPaciente(int id) {
+        return this.repo.deletePacient(id);
     }
 
 
