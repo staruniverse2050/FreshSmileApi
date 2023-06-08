@@ -19,14 +19,13 @@ public class Codigo_administradorServiceIMPL implements Codigo_administradorServ
     }
 
     @Override
-    public void EliminarCodigo(String code) {
-        this.repo.deleteCodigo_administrador(code);
+    public Codigo_administrador BuscarCodigo(int id) {
+        return this.repo.findById(id).get();
     }
 
     @Override
-    public Codigo_administrador CrearCodigo(Codigo_administrador code) {
-        this.repo.newCode(code);
-        return code;
+    public Codigo_administrador ModificarCodigo(Codigo_administrador codigoAdministrador) {
+        return this.repo.save(codigoAdministrador);
     }
 
 }

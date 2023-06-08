@@ -8,6 +8,7 @@ import lombok.Data;
 public class Codigo_administrador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_codigo")
     private int id_codigo;
     @Column(name = "codigo")
     private String codigo;

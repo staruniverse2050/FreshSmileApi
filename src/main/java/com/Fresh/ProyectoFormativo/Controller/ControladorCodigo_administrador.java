@@ -20,8 +20,19 @@ public class ControladorCodigo_administrador {
     }
 
     @GetMapping("/ConsultarCodigo")
-    public ResponseEntity<List<Codigo_administrador>> consultarCodigo() {
-        List<Codigo_administrador> codigo_administrador = codigoAdministradorService.ConsultarCodigo();
-        return ResponseEntity.ok(codigo_administrador);
+    public ResponseEntity<List<Codigo_administrador>> ConsultarCodigo() {
+        List<Codigo_administrador> codigoAdministrador = codigoAdministradorService.ConsultarCodigo();
+        return ResponseEntity.ok(codigoAdministrador);
     }
+
+    @PutMapping("/ModificarCodigo/{id}")
+    public ResponseEntity<Codigo_administrador> modificarCodigo(@PathVariable int id, @RequestBody Codigo_administrador codigoAdministrador) {
+        Codigo_administrador codigoExistente = codigoAdministradorService.BuscarCodigo(id);
+        // Update the fields of the appointment as necessary
+        codigoExistente.setCodigo(codigoAdministrador.getCodigo());
+        // Update other fields of the appointment as necessary
+        Codigo_administrador codigoActualizada = codigoAdministradorService.ModificarCodigo(codigoExistente);
+        return ResponseEntity.ok(codigoActualizada);
+    }
+
 }

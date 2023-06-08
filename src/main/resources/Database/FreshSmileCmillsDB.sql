@@ -43,10 +43,10 @@ CREATE TABLE procedimientos (
 );
 
 -- Tabla codigo_administrador
-CREATE TABLE Codigo_Administrador(
+CREATE TABLE codigo_administrador(
+   id_codigo INT PRIMARY KEY auto_increment,
    codigo VARCHAR(10)
 );
-
 -- Tabla de citas --
 CREATE TABLE citas (
   identificacion_citas INT PRIMARY KEY AUTO_INCREMENT,
