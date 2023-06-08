@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("FreshSmile/Especialistas")
+@RequestMapping("FreshSmile")
 public class ControladorEspecialista {
     private EspecialistaService especialistaService;
 
@@ -22,6 +22,10 @@ public class ControladorEspecialista {
     @Autowired
     public ControladorEspecialista(EspecialistaVCService especialistaVCService) {
         this.especialistaVCService = especialistaVCService;
+    }
+    @Autowired
+    public ControladorEspecialista(EspecialistaService especialistaService) {
+        this.especialistaService = especialistaService;
     }
 
     @GetMapping("/")
@@ -67,7 +71,7 @@ public class ControladorEspecialista {
     }
 
     //Especialista principal//
-    @GetMapping("/ConsultarEspecialista")
+    @GetMapping("/ConsultarEspecialistas")
     public ResponseEntity<List<Especialista>> consultarEspecialista() {
         List<Especialista> especialista = especialistaService.ConsultarEspecialistas();
         return ResponseEntity.ok(especialista);
