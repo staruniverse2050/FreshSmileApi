@@ -14,4 +14,6 @@ public interface EspecialistaRepo extends CrudRepository<Especialista,Integer> {
 
     @Procedure("EliminarEspecialista")
     String deleteEspecialist(int id);
+
+
 }

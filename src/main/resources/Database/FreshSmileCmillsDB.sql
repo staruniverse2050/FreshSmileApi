@@ -15,7 +15,7 @@ CREATE TABLE paciente (
   direccion VARCHAR(100),
   correo VARCHAR(100),
   contraseña VARCHAR(8),
-  estado BIT(1) DEFAULT 1, 
+  estado BIT(1) DEFAULT 1,
   fecha_registro DATETIME DEFAULT NOW()
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE Codigo_Administrador(
 CREATE TABLE citas (
   identificacion_citas INT PRIMARY KEY AUTO_INCREMENT,
   numero_documento INT,
-  nombre_completo VARCHAR(400),  
+  nombre_completo VARCHAR(400),
   tipo_documento VARCHAR(100),
   fecha DATE,
   hora TIME,
@@ -59,6 +59,8 @@ CREATE TABLE citas (
   id_especialista INT,
   id_procedimiento INT,
   estado_cita ENUM('Confirmada', 'Realizada', 'Cancelada'),
+  estado BIT(1) DEFAULT 1,
+  fecha_de_creacion DATETIME DEFAULT NOW(),
   FOREIGN KEY (id_paciente) REFERENCES paciente(identificacion_paciente),
   FOREIGN KEY (id_especialista) REFERENCES especialista(identificacion_especialista),
   FOREIGN KEY (id_procedimiento) REFERENCES procedimientos(identificacion_procedimientos)
@@ -438,7 +440,7 @@ CALL EliminarEspecialista(1166987459);
 CALL ConsultarProcedimientoPorIdentificacion(1);
 CALL CrearProcedimiento('Limpieza Dental', 'Procedimiento de limpieza dental', 50.000);
 CALL ModificarProcedimiento(1,'Extracción Dental', 'Procedimiento para extraer un diente dañado', 90.000);
-CALL EliminarProcedimiento(2);
+CALL EliminarProcedimiento(2);
 
 CALL crear_cita(1094220208, 'Marlin Sanchez', 'Cédula de Ciudadanía', '2023-06-10', '10:00:00', 1094226206, 1106987459, 1, 'Confirmada');
 CALL modificar_cita(2, 1094220287, 'Marlin Sanchez', 'Cédula de Ciudadanía', '2023-06-10', '10:00:00', 1094226206, 1106987459, 1, 'Confirmada');

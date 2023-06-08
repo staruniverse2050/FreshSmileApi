@@ -9,5 +9,13 @@ import lombok.Data;
 public class Codigo_administrador {
     @Id
     @Column(name = "codigo")
-    private String codigo;
+    private int codigo;
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 }

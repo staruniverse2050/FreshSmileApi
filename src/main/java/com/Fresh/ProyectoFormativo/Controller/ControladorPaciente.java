@@ -29,7 +29,7 @@ public class ControladorPaciente {
     public ResponseEntity<List<Paciente>> consultarPacientesActivos() {
         List<Paciente> pacientesActivos = this.impl.ConsultarPaciente()
                 .stream()
-                .filter(paciente -> paciente.isEstado())
+                .filter(paciente -> "Activo".equalsIgnoreCase(paciente.getEstado()))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(pacientesActivos);
@@ -83,10 +83,11 @@ public class ControladorPaciente {
     @GetMapping("/ConsultarPacientesOff")
     public ResponseEntity<List<Paciente>> listarPacientesDesactivados() {
         List<Paciente> pacientesDesactivados = impl.ConsultarPaciente().stream()
-                .filter(paciente -> paciente.isEstado())
+                .filter(paciente -> paciente.getEstado().equalsIgnoreCase("Desactivo"))
                 .collect(Collectors.toList());
         return ResponseEntity.ok                                                                                                                                                              (pacientesDesactivados);
     }
+
 
 
     @GetMapping("/BuscarPacientes/{id}")
@@ -95,13 +96,14 @@ public class ControladorPaciente {
         if (paciente == null) {
             return ResponseEntity.notFound().build();
         }
-        if (!paciente.isEstado()) {
+        if (!paciente.getEstado().equalsIgnoreCase("Activo")) {
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Este paciente se encuentra innactivo");
             return ResponseEntity.ok(response);
         }
         return ResponseEntity.ok(paciente);
     }
+
 
 
     @DeleteMapping("/EliminarPacientes/{id}")
@@ -116,18 +118,18 @@ public class ControladorPaciente {
 
         return ResponseEntity.ok().body(response);
     }
-    /*@PutMapping("/ActivarPaciente/{id}")
+    @PutMapping("/ActivarPaciente/{id}")
     public ResponseEntity<Map<String, Object>> activarPaciente(@PathVariable int id) {
         Paciente pacienteActivado = impl.BuscarPaciente(id);
         pacienteActivado.setEstado(true); // Establecer el estado del paciente como activo
-        impl.actualizarEstadoPaciente(pacienteActivado); // Actualizar el registro del paciente en la base de datos
+        impl.changePacientStatus(pacienteActivado); // Actualizar el registro del paciente en la base de datos
 
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Paciente activado con éxito");
         response.put("pacienteActivado", pacienteActivado);
 
         return ResponseEntity.ok().body(response);
-    }*/
+    }
 
 
 

@@ -1,13 +1,18 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
 import com.Fresh.ProyectoFormativo.Entity.Citas;
+import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import com.Fresh.ProyectoFormativo.Service.CitasService;
+import com.Fresh.ProyectoFormativo.Service.CitasServiceIMPL.CitasServiceIMPL;
+import com.Fresh.ProyectoFormativo.Service.PacienteServiceIMPL.PacienteServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/FreshSmile")
@@ -18,6 +23,9 @@ public class ControladorCitas {
     public ControladorCitas(CitasService citasService) {
         this.citasService = citasService;
     }
+
+    @Autowired
+    private CitasServiceIMPL impl;
 
     @GetMapping("/ConsultarCitas")
     public ResponseEntity<List<Citas>> consultarCitas() {
@@ -42,10 +50,16 @@ public class ControladorCitas {
         return ResponseEntity.ok(citaActualizada);
     }
 
-    @DeleteMapping("/EliminarCita/{id}")
-    public ResponseEntity<String> eliminarCita(@PathVariable int id) {
-        citasService.CancelarCita(id);
-        String mensaje = "Cita eliminada exitosamente"; // Success message
-        return ResponseEntity.noContent().header("Message", mensaje).build();
+    @DeleteMapping("CancelarCita/{id}")
+    public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
+        Citas citaDesactivada = impl.BuscarCita(id);
+        citaDesactivada.setEstado(false);
+        impl.ModificarCita(citaDesactivada);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Cita desactivada con éxito");
+        response.put("citaDesactivada", citaDesactivada);
+
+        return ResponseEntity.ok().body(response);
     }
 }

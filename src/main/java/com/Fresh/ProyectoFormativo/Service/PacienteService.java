@@ -11,4 +11,6 @@ public interface PacienteService {
     Paciente BuscarPaciente(int id);
     String EliminarPaciente(int id);
     String changePacientStatus(int Id, boolean estatus);
+
+    void changePacientStatus(Paciente pacienteActivado);
 }

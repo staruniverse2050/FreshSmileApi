@@ -23,4 +23,36 @@ public class Procedimiento {
 
     @Column(name = "costo")
     private BigInteger costo;
+
+    public int getIdentificacion_procedimientos() {
+        return identificacion_procedimientos;
+    }
+
+    public void setIdentificacion_procedimientos(int identificacion_procedimientos) {
+        this.identificacion_procedimientos = identificacion_procedimientos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public BigInteger getCosto() {
+        return costo;
+    }
+
+    public void setCosto(BigInteger costo) {
+        this.costo = costo;
+    }
 }

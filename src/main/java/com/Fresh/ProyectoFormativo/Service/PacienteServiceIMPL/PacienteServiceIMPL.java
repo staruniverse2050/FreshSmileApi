@@ -43,5 +43,4 @@ public class PacienteServiceIMPL implements PacienteService {
         return this.repo.changePacientStatus(Id, estatus);
     }
 
-
 }
