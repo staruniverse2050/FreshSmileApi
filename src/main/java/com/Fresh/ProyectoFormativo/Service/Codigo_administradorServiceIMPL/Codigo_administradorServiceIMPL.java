@@ -1,6 +1,5 @@
 package com.Fresh.ProyectoFormativo.Service.Codigo_administradorServiceIMPL;
 
-import com.Fresh.ProyectoFormativo.Entity.Citas;
 import com.Fresh.ProyectoFormativo.Entity.Codigo_administrador;
 import com.Fresh.ProyectoFormativo.Repository.Codigo_administradorRepo;
 import com.Fresh.ProyectoFormativo.Service.Codigo_administradorService;
@@ -25,8 +24,9 @@ public class Codigo_administradorServiceIMPL implements Codigo_administradorServ
     }
 
     @Override
-    public void CrearCodigo(Codigo_administrador code) {
+    public Codigo_administrador CrearCodigo(Codigo_administrador code) {
         this.repo.newCode(code);
+        return code;
     }
 
 }
