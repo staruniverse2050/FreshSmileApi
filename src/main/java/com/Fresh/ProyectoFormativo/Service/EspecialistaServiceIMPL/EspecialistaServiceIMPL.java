@@ -4,9 +4,10 @@ import com.Fresh.ProyectoFormativo.Entity.Especialista;
 import com.Fresh.ProyectoFormativo.Repository.EspecialistaRepo;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class EspecialistaServiceIMPL implements EspecialistaService {
     @Autowired
     private EspecialistaRepo repo;
