@@ -11,27 +11,30 @@ import java.util.List;
 public class EspecialistaServiceIMPL implements EspecialistaService {
     @Autowired
     private EspecialistaRepo repo;
+
     @Override
     public List<Especialista> ConsultarEspecialistas() {
-        return (List<Especialista>)this.repo.findAll();
+        return (List<Especialista>) this.repo.findAll();
     }
 
     @Override
-    public String CrearEspecialista(Especialista especialista) {
-        return this.repo.newEspecialist(especialista);
+    public Especialista CrearEspecialista(Especialista especialista) {
+        return this.repo.save(especialista);
     }
 
     @Override
-    public String ModificarEspecialista(Especialista especialista) {
-        return this.repo.modifyEspecialist(especialista);
+    public Especialista ModificarEspecialista(Especialista especialista) {
+        return this.repo.save(especialista);
     }
 
     @Override
-    public Especialista BuscarEspecialista(int id) { return this.repo.findEspecialistById(id); }
+    public Especialista BuscarEspecialista(int id) {
+        return this.repo.findById(id).get();
+    }
 
     @Override
-    public String EliminarEspecialista(int id) {
-        return this.repo.deleteEspecialist(id);
+    public void EliminarEspecialista(int id) {
+        this.repo.deleteById(id);
     }
 
 

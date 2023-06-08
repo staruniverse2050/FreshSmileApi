@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface EspecialistaService {
     List<Especialista> ConsultarEspecialistas();
-    String CrearEspecialista(Especialista especialista);
-    String ModificarEspecialista(Especialista especialista);
-    Especialista BuscarEspecialista(int id);
-    String EliminarEspecialista(int id);
+    public Especialista CrearEspecialista(Especialista especialista);
+    public Especialista ModificarEspecialista(Especialista especialista);
+
+    public Especialista BuscarEspecialista(int id);
+    public void EliminarEspecialista(int id);
 }

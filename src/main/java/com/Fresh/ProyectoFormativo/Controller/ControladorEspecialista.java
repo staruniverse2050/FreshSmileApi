@@ -33,43 +33,44 @@ public class ControladorEspecialista {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Especialistas>> GetAllEspecialist(){
+    public ResponseEntity<List<Especialistas>> GetAllEspecialist() {
         return ResponseEntity.ok(this.especialistaVCService.getAllEspecialist());
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Especialistas> PostNewEspecialist(@RequestBody Especialistas newEspecialist){
+    public ResponseEntity<Especialistas> PostNewEspecialist(@RequestBody Especialistas newEspecialist) {
         Especialistas createdEspecialist = this.especialistaVCService.createEspecialst(newEspecialist);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEspecialist);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Especialistas> PutChangedEspecialist(@RequestBody Especialistas changedEspecialist, @PathVariable String id){
+    public ResponseEntity<Especialistas> PutChangedEspecialist(@RequestBody Especialistas changedEspecialist, @PathVariable String id) {
         Especialistas updatedEspecialist = this.especialistaVCService.updateEspecialist(changedEspecialist, id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedEspecialist);
     }
 
     @PatchMapping("/comment/{id}")
-    public ResponseEntity<Especialistas> PatchCommentEspecialist(@RequestBody Comentarios newComent, @PathVariable String id){
+    public ResponseEntity<Especialistas> PatchCommentEspecialist(@RequestBody Comentarios newComent, @PathVariable String id) {
         Especialistas commentedEspecialist = this.especialistaVCService.comentEspecialist(newComent, id);
         return ResponseEntity.status(HttpStatus.OK).body(commentedEspecialist);
     }
 
     @PatchMapping("/vote/{id}")
-    public ResponseEntity<Especialistas> PatchVoteEspecialist(@RequestParam String vote, @PathVariable String id){
+    public ResponseEntity<Especialistas> PatchVoteEspecialist(@RequestParam String vote, @PathVariable String id) {
         Especialistas votedEspecialist = this.especialistaVCService.voteEspecialist(Integer.parseInt(vote), id);
         return ResponseEntity.status(HttpStatus.OK).body(votedEspecialist);
     }
 
-    private class DeleteResult{
+    private class DeleteResult {
         public String Message;
-        public DeleteResult(String message){
+
+        public DeleteResult(String message) {
             this.Message = message;
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<DeleteResult> DeleteEspecialist(@PathVariable String id){
+    public ResponseEntity<DeleteResult> DeleteEspecialist(@PathVariable String id) {
         this.especialistaVCService.deleteEspecialst(id);
         return ResponseEntity.ok(new DeleteResult("Especialista eliminado correctamente"));
     }
@@ -81,33 +82,38 @@ public class ControladorEspecialista {
         return ResponseEntity.ok(especialista);
     }
 
-    @PostMapping("/CrearEspecialista")
-    public ResponseEntity<String> crearEspecialista(@RequestBody Especialista especialista) {
-        String nuevoespecialista = especialistaService.CrearEspecialista(especialista);
-        String mensaje = "Especialista creado exitosamente"; // Success message
-        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
+    @PostMapping
+    @RequestMapping(value = "/CrearEspecialista", method = RequestMethod.POST)
+    public ResponseEntity<?> CrearEspecialistas(@RequestBody Especialista especlista) {
+        Especialista EspecialistaCreado = this.impl.CrearEspecialista(especlista);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Especialista creado con éxito");
+        response.put("especialistaCreado", EspecialistaCreado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    @PutMapping
+    @RequestMapping(value = "/ModificarEspecialista",method = RequestMethod.PUT)
+    public ResponseEntity<?>ModificarEspecialista(@RequestBody Especialista especialista){
+        Especialista EspecialistaModificado=this.impl.ModificarEspecialista(especialista);
+        String message = "Administrador modificado con éxito.";
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", message);
+        response.put("especialista", EspecialistaModificado);
+        return ResponseEntity.ok().body(response);
     }
 
-    @PutMapping("/ModificarEspecialista/{id}")
-    public ResponseEntity<String> modificarEspecialista(@PathVariable int id, @RequestBody Especialista especialista) {
-        Especialista especialistaExistente = especialistaService.BuscarEspecialista(id);
-        // Update the fields of the appointment as necessary
-        especialistaExistente.setEspecialidad(especialista.getEspecialidad());
-        // Update other fields of the appointment as necessary
-        String especialistaActualizado = especialistaService.ModificarEspecialista(especialistaExistente);
-        return ResponseEntity.ok(especialistaActualizado);
+
+        @GetMapping("/BuscarEspecialista/{id}")
+        public ResponseEntity<?> buscarEspecialista ( @PathVariable int id){
+            Especialista especialista = impl.BuscarEspecialista(id);
+            return ResponseEntity.ok(especialista);
+        }
+
+        @DeleteMapping("/EliminarEspecialista/{id}")
+        public ResponseEntity<String> eliminarEspecialista ( @PathVariable int id){
+            especialistaService.EliminarEspecialista(id);
+            String mensaje = "Especialsita eliminado exitosamente"; // Success message
+            return ResponseEntity.noContent().header("Message", mensaje).build();
+        }
     }
 
-    @GetMapping("/BuscarEspecialista/{id}")
-    public ResponseEntity<?> buscarEspecialista(@PathVariable int id) {
-        Especialista especialista = impl.BuscarEspecialista(id);
-        return ResponseEntity.ok(especialista);
-    }
-
-    @DeleteMapping("/EliminarEspecialista/{id}")
-    public ResponseEntity<String> eliminarEspecialista(@PathVariable int id) {
-        especialistaService.EliminarEspecialista(id);
-        String mensaje = "Especialsita eliminado exitosamente"; // Success message
-        return ResponseEntity.noContent().header("Message", mensaje).build();
-    }
-}
