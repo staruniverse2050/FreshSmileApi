@@ -1,5 +1,6 @@
 package com.Fresh.ProyectoFormativo.Service.Codigo_administradorServiceIMPL;
 
+import com.Fresh.ProyectoFormativo.Entity.Citas;
 import com.Fresh.ProyectoFormativo.Entity.Codigo_administrador;
 import com.Fresh.ProyectoFormativo.Repository.Codigo_administradorRepo;
 import com.Fresh.ProyectoFormativo.Service.Codigo_administradorService;
@@ -15,7 +16,7 @@ public class Codigo_administradorServiceIMPL implements Codigo_administradorServ
 
     @Override
     public List<Codigo_administrador> ConsultarCodigo() {
-        return (List<Codigo_administrador>) this.repo.getCodigo_administrador();
+        return (List<Codigo_administrador>) this.repo.findAll();
     }
 
     @Override

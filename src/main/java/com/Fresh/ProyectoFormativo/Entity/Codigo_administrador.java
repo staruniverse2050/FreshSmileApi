@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Table(name = "codigo_administrador")
 public class Codigo_administrador {
-    @Id
+
     @Column(name = "codigo")
     private String codigo;
 

@@ -20,9 +20,8 @@ public class ControladorCodigo_administrador {
     }
 
     @GetMapping("/ConsultarCodigo")
-    public ResponseEntity<List<Codigo_administrador>> ConsultarCodigo() {
-        List<Codigo_administrador> codigoAdministrador = codigoAdministradorService.ConsultarCodigo();
-        return ResponseEntity.ok(codigoAdministrador);
+    public ResponseEntity<List<Codigo_administrador>> consultarCodigo() {
+        List<Codigo_administrador> codigo_administrador = codigoAdministradorService.ConsultarCodigo();
+        return ResponseEntity.ok(codigo_administrador);
     }
-
 }
