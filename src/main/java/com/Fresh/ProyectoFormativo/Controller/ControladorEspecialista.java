@@ -82,15 +82,15 @@ public class ControladorEspecialista {
         return ResponseEntity.ok(especialista);
     }
 
-    @PostMapping
-    @RequestMapping(value = "/CrearEspecialista",method = RequestMethod.POST)
-    public ResponseEntity<?>CrearEspecialista(@RequestBody Especialista especialista){
-        Especialista EspecialistaCreado=this.impl.CrearEspecialista(especialista);
+    @PostMapping("/CrearEspecialista")
+    public ResponseEntity<?> crearEspecialista(@RequestBody Especialista especialista) {
+        Especialista especialistaCreado = this.impl.CrearEspecialista(especialista);
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "Administrador creado con éxito");
-        response.put("especialistaCreado", EspecialistaCreado);
+        response.put("message", "Especialista creado con éxito");
+        response.put("especialistaCreado", especialistaCreado);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
     @PutMapping
     @RequestMapping(value = "/ModificarEspecialista",method = RequestMethod.PUT)
     public ResponseEntity<?>ModificarEspecialista(@RequestBody Especialista especialista){
