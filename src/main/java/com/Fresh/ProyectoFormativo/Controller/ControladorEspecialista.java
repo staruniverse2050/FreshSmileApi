@@ -3,21 +3,28 @@ package com.Fresh.ProyectoFormativo.Controller;
 import com.Fresh.ProyectoFormativo.Documents.Comentarios;
 import com.Fresh.ProyectoFormativo.Documents.Especialistas;
 import com.Fresh.ProyectoFormativo.Entity.Especialista;
+import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
+import com.Fresh.ProyectoFormativo.Service.EspecialistaServiceIMPL.EspecialistaServiceIMPL;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaVCService;
+import com.Fresh.ProyectoFormativo.Service.PacienteServiceIMPL.PacienteServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("FreshSmile")
+@RequestMapping("FreshSmile/Especialistas")
 public class ControladorEspecialista {
     private EspecialistaService especialistaService;
 
     private EspecialistaVCService especialistaVCService;
+    @Autowired
+    private EspecialistaServiceIMPL impl;
 
     @Autowired
     public ControladorEspecialista(EspecialistaVCService especialistaVCService, EspecialistaService especialistaService) {
@@ -68,7 +75,7 @@ public class ControladorEspecialista {
     }
 
     //Especialista principal//
-    @GetMapping("/ConsultarEspecialistas")
+    @GetMapping("/ConsultarEspecialista")
     public ResponseEntity<List<Especialista>> consultarEspecialista() {
         List<Especialista> especialista = especialistaService.ConsultarEspecialistas();
         return ResponseEntity.ok(especialista);
@@ -89,6 +96,12 @@ public class ControladorEspecialista {
         // Update other fields of the appointment as necessary
         String especialistaActualizado = especialistaService.ModificarEspecialista(especialistaExistente);
         return ResponseEntity.ok(especialistaActualizado);
+    }
+
+    @GetMapping("/BuscarEspecialista/{id}")
+    public ResponseEntity<?> buscarEspecialista(@PathVariable int id) {
+        Especialista especialista = impl.BuscarEspecialista(id);
+        return ResponseEntity.ok(especialista);
     }
 
     @DeleteMapping("/EliminarEspecialista/{id}")
