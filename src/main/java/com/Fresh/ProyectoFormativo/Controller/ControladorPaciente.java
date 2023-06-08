@@ -48,24 +48,24 @@ public class ControladorPaciente {
 
 
 
-    /*@PostMapping("/loginPaciente")
-    public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
+    //@PostMapping("/loginPaciente")
+    //public ResponseEntity<String> iniciarSesion(@RequestParam("correo") String correo, @RequestParam("contraseña") String contraseña) {
         // Verificar si las credenciales son válidas
-        Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
-        if (paciente != null) {
+       // Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
+       // if (paciente != null) {
             // Las credenciales son válidas
-            return ResponseEntity.ok("Inicio de sesión exitoso");
-        } else {
+           // return ResponseEntity.ok("Inicio de sesión exitoso");
+       // } else {
             // Las credenciales son incorrectas
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
-        }
-    }
+            // return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
+      //  }
+   // }
 
-    private boolean validarCredenciales(String correo, String contraseña) {
+    //private boolean validarCredenciales(String correo, String contraseña) {
         // Buscar el paciente por correo y contraseña en el repositorio
-        Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
-        return paciente != null;
-    }*/
+    //    Paciente paciente = pacienteRepo.findByCorreoAndContraseña(correo, contraseña);
+    //    return paciente != null;
+    //}
 
 
 
@@ -89,7 +89,6 @@ public class ControladorPaciente {
     }
 
 
-
     @GetMapping("/BuscarPacientes/{id}")
     public ResponseEntity<?> buscarPaciente(@PathVariable int id) {
         Paciente paciente = impl.BuscarPaciente(id);
@@ -103,7 +102,6 @@ public class ControladorPaciente {
         }
         return ResponseEntity.ok(paciente);
     }
-
 
 
     @DeleteMapping("/EliminarPacientes/{id}")
@@ -132,7 +130,12 @@ public class ControladorPaciente {
     }
 
 
-
 }
+
+
+
+
+
+
 
 
