@@ -1,21 +1,19 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
 import com.Fresh.ProyectoFormativo.Documents.Comentarios;
-import com.Fresh.ProyectoFormativo.Documents.Especialistas;
+import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
 import com.Fresh.ProyectoFormativo.Entity.Especialista;
-import com.Fresh.ProyectoFormativo.Entity.Paciente;
+import com.Fresh.ProyectoFormativo.Models.EspecialistaModel;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaServiceIMPL.EspecialistaServiceIMPL;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaVCService;
-import com.Fresh.ProyectoFormativo.Service.PacienteServiceIMPL.PacienteServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("FreshSmile/Especialistas")
@@ -33,31 +31,38 @@ public class ControladorEspecialista {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Especialistas>> GetAllEspecialist(){
-        return ResponseEntity.ok(this.especialistaVCService.getAllEspecialist());
+    public ResponseEntity<List<EspecialistaModel>> GetAllEspecialist(){
+        List<EspecialistaVC> especialistaVCS = this.especialistaVCService.getAllEspecialist();
+        List<Especialista> especialistas = this.especialistaService.ConsultarEspecialistas();
+        List<EspecialistaModel> models = new ArrayList<EspecialistaModel>();
+        especialistas.stream().forEach(especialista -> {
+            models.add(new EspecialistaModel(especialistaVCS.stream().filter(especialistaVC -> especialistaVC.getIdentificacion_especialista() != especialista.getIdentificacion_especialista()).toList().stream().findFirst().get(), especialista));
+        });
+        return ResponseEntity.ok(models);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Especialistas> PostNewEspecialist(@RequestBody Especialistas newEspecialist){
-        Especialistas createdEspecialist = this.especialistaVCService.createEspecialst(newEspecialist);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdEspecialist);
+    public ResponseEntity<EspecialistaModel> PostNewEspecialist(@RequestBody Especialista newEspecialist){
+        String createdEspecialist = this.especialistaService.CrearEspecialista(newEspecialist);
+        EspecialistaVC createdEspecialistaVC = this.especialistaVCService.createEspecialst(new EspecialistaVC(newEspecialist.getIdentificacion_especialista()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new EspecialistaModel(createdEspecialistaVC, newEspecialist));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Especialistas> PutChangedEspecialist(@RequestBody Especialistas changedEspecialist, @PathVariable String id){
-        Especialistas updatedEspecialist = this.especialistaVCService.updateEspecialist(changedEspecialist, id);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedEspecialist);
+    @PutMapping("/update")
+    public ResponseEntity<Especialista> PutChangedEspecialist(@RequestBody Especialista changedEspecialist){
+        String updatedEspecialist = this.especialistaService.ModificarEspecialista(changedEspecialist);
+        return ResponseEntity.status(HttpStatus.OK).body(this.especialistaService.BuscarEspecialista(changedEspecialist.getIdentificacion_especialista()));
     }
 
     @PatchMapping("/comment/{id}")
-    public ResponseEntity<Especialistas> PatchCommentEspecialist(@RequestBody Comentarios newComent, @PathVariable String id){
-        Especialistas commentedEspecialist = this.especialistaVCService.comentEspecialist(newComent, id);
+    public ResponseEntity<EspecialistaVC> PatchCommentEspecialist(@RequestBody Comentarios newComent, @PathVariable String id){
+        EspecialistaVC commentedEspecialist = this.especialistaVCService.comentEspecialist(newComent, id);
         return ResponseEntity.status(HttpStatus.OK).body(commentedEspecialist);
     }
 
     @PatchMapping("/vote/{id}")
-    public ResponseEntity<Especialistas> PatchVoteEspecialist(@RequestParam String vote, @PathVariable String id){
-        Especialistas votedEspecialist = this.especialistaVCService.voteEspecialist(Integer.parseInt(vote), id);
+    public ResponseEntity<EspecialistaVC> PatchVoteEspecialist(@RequestParam String vote, @PathVariable String id){
+        EspecialistaVC votedEspecialist = this.especialistaVCService.voteEspecialist(Integer.parseInt(vote), id);
         return ResponseEntity.status(HttpStatus.OK).body(votedEspecialist);
     }
 

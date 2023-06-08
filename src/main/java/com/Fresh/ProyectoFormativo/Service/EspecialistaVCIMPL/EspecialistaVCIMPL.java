@@ -1,7 +1,7 @@
 package com.Fresh.ProyectoFormativo.Service.EspecialistaVCIMPL;
 
 import com.Fresh.ProyectoFormativo.Documents.Comentarios;
-import com.Fresh.ProyectoFormativo.Documents.Especialistas;
+import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
 import com.Fresh.ProyectoFormativo.Repository.EspecialistaVCRepo;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaVCService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,25 +19,13 @@ public class EspecialistaVCIMPL implements EspecialistaVCService {
     }
 
     @Override
-    public List<Especialistas> getAllEspecialist() {
+    public List<EspecialistaVC> getAllEspecialist() {
         return this.repo.findAll();
     }
 
     @Override
-    public Especialistas createEspecialst(Especialistas newEspecialist) {
+    public EspecialistaVC createEspecialst(EspecialistaVC newEspecialist) {
         return this.repo.save(newEspecialist);
-    }
-
-    @Override
-    public Especialistas updateEspecialist(Especialistas newEspecialist, String id) {
-        Especialistas oldEspecialist = this.repo.findById(id).get();
-        oldEspecialist.setAños_Experiencia(newEspecialist.getAños_Experiencia());
-        oldEspecialist.setCorreo(newEspecialist.getCorreo());
-        oldEspecialist.setNombre(newEspecialist.getNombre());
-        oldEspecialist.setEdad(newEspecialist.getEdad());
-        oldEspecialist.setTelefono(newEspecialist.getTelefono());
-        oldEspecialist.setEspecialidad(newEspecialist.getEspecialidad());
-        return this.repo.save(oldEspecialist);
     }
 
     @Override
@@ -46,8 +34,8 @@ public class EspecialistaVCIMPL implements EspecialistaVCService {
     }
 
     @Override
-    public Especialistas comentEspecialist(Comentarios newComent, String id) {
-        Especialistas oldEspecialist = this.repo.findById(id).get();
+    public EspecialistaVC comentEspecialist(Comentarios newComent, String id) {
+        EspecialistaVC oldEspecialist = this.repo.findById(id).get();
         List<Comentarios> oldComents = oldEspecialist.getComentarios();
         oldComents.add(newComent);
         oldEspecialist.setComentarios(oldComents);
@@ -55,14 +43,14 @@ public class EspecialistaVCIMPL implements EspecialistaVCService {
     }
 
     @Override
-    public Especialistas voteEspecialist(Number vote, String id) {
-        Especialistas especialistasForVote = this.repo.findById(id).get();
-        List<Number> actualVotes = especialistasForVote.getRegistroVotaciones();
+    public EspecialistaVC voteEspecialist(Number vote, String id) {
+        EspecialistaVC especialistasForVote = this.repo.findById(id).get();
+        List<Number> actualVotes = especialistasForVote.getVotos();
         actualVotes.add(vote);
         var voteWrapper = new Object(){ Number voteCount = 0; };
         actualVotes.forEach(singleVote -> voteWrapper.voteCount = (int)singleVote + (int)voteWrapper.voteCount );
         voteWrapper.voteCount = (int)voteWrapper.voteCount / actualVotes.size();
-        especialistasForVote.setRegistroVotaciones(actualVotes);
+        especialistasForVote.setVotos(actualVotes);
         especialistasForVote.setValoracion(voteWrapper.voteCount.doubleValue());
         return this.repo.save(especialistasForVote);
     }

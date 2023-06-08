@@ -1,15 +1,14 @@
 package com.Fresh.ProyectoFormativo.Service;
 
 import com.Fresh.ProyectoFormativo.Documents.Comentarios;
-import com.Fresh.ProyectoFormativo.Documents.Especialistas;
+import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
 
 import java.util.List;
 
 public interface EspecialistaVCService {
-    List<Especialistas>  getAllEspecialist();
-    Especialistas createEspecialst(Especialistas newEspecialist);
-    Especialistas updateEspecialist(Especialistas newEspecialist,String id);
+    List<EspecialistaVC>  getAllEspecialist();
+    EspecialistaVC createEspecialst(EspecialistaVC newEspecialist);
     void deleteEspecialst(String id);
-    Especialistas comentEspecialist(Comentarios newComent, String id);
-    Especialistas voteEspecialist(Number vote, String id);
+    EspecialistaVC comentEspecialist(Comentarios newComent, String id);
+    EspecialistaVC voteEspecialist(Number vote, String id);
 }
