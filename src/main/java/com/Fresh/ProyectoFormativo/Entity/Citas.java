@@ -29,7 +29,7 @@ public class Citas {
     private String tipo_documento;
 
     @Column(name = "fecha")
-    private Date fecha;
+    private LocalDate fecha;
 
     @Column(name = "hora")
     private Time hora;
@@ -84,11 +84,11 @@ public class Citas {
         this.tipo_documento = tipo_documento;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
