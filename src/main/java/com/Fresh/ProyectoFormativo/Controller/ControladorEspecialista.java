@@ -83,11 +83,11 @@ public class ControladorEspecialista {
     }
 
     @PostMapping
-    @RequestMapping(value = "/CrearEspecialista", method = RequestMethod.POST)
-    public ResponseEntity<?> CrearEspecialistas(@RequestBody Especialista especlista) {
-        Especialista EspecialistaCreado = this.impl.CrearEspecialista(especlista);
+    @RequestMapping(value = "/CrearEspecialista",method = RequestMethod.POST)
+    public ResponseEntity<?>CrearEspecialista(@RequestBody Especialista especialista){
+        Especialista EspecialistaCreado=this.impl.CrearEspecialista(especialista);
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "Especialista creado con éxito");
+        response.put("message", "Administrador creado con éxito");
         response.put("especialistaCreado", EspecialistaCreado);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -103,17 +103,17 @@ public class ControladorEspecialista {
     }
 
 
-        @GetMapping("/BuscarEspecialista/{id}")
-        public ResponseEntity<?> buscarEspecialista ( @PathVariable int id){
-            Especialista especialista = impl.BuscarEspecialista(id);
-            return ResponseEntity.ok(especialista);
-        }
-
-        @DeleteMapping("/EliminarEspecialista/{id}")
-        public ResponseEntity<String> eliminarEspecialista ( @PathVariable int id){
-            especialistaService.EliminarEspecialista(id);
-            String mensaje = "Especialsita eliminado exitosamente"; // Success message
-            return ResponseEntity.noContent().header("Message", mensaje).build();
-        }
+    @GetMapping("/BuscarEspecialista/{id}")
+    public ResponseEntity<?> buscarEspecialista ( @PathVariable int id){
+        Especialista especialista = impl.BuscarEspecialista(id);
+        return ResponseEntity.ok(especialista);
     }
+
+    @DeleteMapping("/EliminarEspecialista/{id}")
+    public ResponseEntity<String> eliminarEspecialista ( @PathVariable int id){
+        especialistaService.EliminarEspecialista(id);
+        String mensaje = "Especialsita eliminado exitosamente"; // Success message
+        return ResponseEntity.noContent().header("Message", mensaje).build();
+    }
+}
 
