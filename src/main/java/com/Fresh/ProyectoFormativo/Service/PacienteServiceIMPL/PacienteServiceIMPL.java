@@ -43,4 +43,9 @@ public class PacienteServiceIMPL implements PacienteService {
         return this.repo.changePacientStatus(Id, estatus);
     }
 
+    @Override
+    public void changePacientStatus(Paciente pacienteActivado) {
+
+    }
+
 }

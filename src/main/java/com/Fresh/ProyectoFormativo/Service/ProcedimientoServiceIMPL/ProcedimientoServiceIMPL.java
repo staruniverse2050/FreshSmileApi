@@ -14,28 +14,28 @@ public class ProcedimientoServiceIMPL implements ProcedimientoService {
     private ProcedimientoRepo repo;
 
     @Override
-    public List<Procedimiento> ConsultarTipo_cita() {
+    public List<Procedimiento>ConsultarProcedimientos() {
         return (List<Procedimiento>) this.repo.findAll();
     }
 
     @Override
-    public Procedimiento CrearTipo_cita(Procedimiento tipoCita) {
-        tipoCita.setNombre(tipoCita.getNombre());
-        return this.repo.save(tipoCita);
+    public Procedimiento CrearProcedimiento(Procedimiento procedimiento) {
+        procedimiento.setNombre(procedimiento.getNombre());
+        return this.repo.save(procedimiento);
     }
 
     @Override
-    public Procedimiento ModificarTipo_cita(Procedimiento tipoCita) {
-        return this.repo.save(tipoCita);
+    public Procedimiento ModificarProcedimiento(Procedimiento procedimiento) {
+        return this.repo.save(procedimiento);
     }
 
     @Override
-    public Procedimiento BuscarTipo_cita(int id) {
+    public Procedimiento BuscarProcedimiento(int id) {
         return this.repo.findById(id).get();
     }
 
     @Override
-    public void EliminarTipo_cita(int id) {
+    public void EliminarProcedimiento(int id) {
         this.repo.deleteById(id);
     }
 }
