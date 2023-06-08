@@ -6,11 +6,6 @@ import lombok.Data;
 @Entity
 @Table(name = "codigo_administrador")
 public class Codigo_administrador {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "codigo")
+    @Column(name = "codigo", nullable = false)
     private String codigo;
-
 }
