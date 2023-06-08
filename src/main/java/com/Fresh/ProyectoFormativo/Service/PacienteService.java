@@ -6,11 +6,9 @@ import java.util.List;
 
 public interface PacienteService {
     List<Paciente> ConsultarPaciente();
-    String CrearPaciente(Paciente paciente);
-    String ModificarPaciente(Paciente paciente);
+    Paciente CrearPaciente(Paciente paciente);
+    Paciente ModificarPaciente(Paciente paciente);
     Paciente BuscarPaciente(int id);
-    String EliminarPaciente(int id);
-    String changePacientStatus(int Id, boolean estatus);
-
-    void changePacientStatus(Paciente pacienteActivado);
+    void EliminarPaciente(int id);
+    void actualizarEstadoPaciente(Paciente paciente);
 }
