@@ -47,11 +47,6 @@ public class ControladorPaciente {
     }
 
 
-
-
-
-
-
     @PutMapping
     @RequestMapping(value = "/ModificarPacientes",method = RequestMethod.PUT)
     public ResponseEntity<?>ModificarPacientes(@RequestBody Paciente paciente){
@@ -115,9 +110,5 @@ public class ControladorPaciente {
 
 
 }
-
-
-
-
 
 
