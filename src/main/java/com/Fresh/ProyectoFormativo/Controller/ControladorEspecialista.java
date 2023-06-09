@@ -36,17 +36,20 @@ public class ControladorEspecialista {
         return ResponseEntity.ok(especialista);
     }
 
-    @PostMapping
-    @RequestMapping(value = "/CrearEspecialista",method = RequestMethod.POST)
-    public ResponseEntity<?>CrearEspecialista(@RequestBody Especialista especialista){
-        Especialista EspecialistaCreado = this.especialistaService.CrearEspecialista(especialista);
-        EspecialistaVC createdEspecialistaVC = this.especialistaVCService.createEspecialst(new EspecialistaVC(EspecialistaCreado.getIdentificacion_especialista()));
+    @PostMapping("/CrearEspecialista")
+    public ResponseEntity<?> crearEspecialista(@RequestBody Especialista especialista) {
+        Especialista especialistaCreado = this.especialistaService.CrearEspecialista(especialista);
+        EspecialistaVC createdEspecialistaVC = this.especialistaVCService.createEspecialst(new EspecialistaVC(especialistaCreado.getIdentificacion_especialista()));
+
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "Administrador creado con éxito");
+        response.put("message", "Especialista creado con éxito");
+
         Map<String, Object> data = new HashMap<>();
-        data.put("data", EspecialistaCreado);
+        data.put("especialista", especialistaCreado);
         data.put("rating", createdEspecialistaVC);
+
         response.put("especialistaCreado", data);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -69,10 +72,11 @@ public class ControladorEspecialista {
     }
 
     @DeleteMapping("/EliminarEspecialista/{id}")
-    public ResponseEntity<String> eliminarEspecialista ( @PathVariable int id){
+    public ResponseEntity<String> eliminarEspecialista(@PathVariable int id) {
         especialistaService.EliminarEspecialista(id);
-        String mensaje = "Especialsita eliminado exitosamente"; // Success message
+        String mensaje = "Especialista eliminado exitosamente"; // Mensaje de éxito
         return ResponseEntity.noContent().header("Message", mensaje).build();
     }
+
 }
 

@@ -43,12 +43,19 @@ public class ControladorCitas {
     @PutMapping("/ModificarCita/{id}")
     public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
         Citas citaExistente = citasService.BuscarCita(id);
-        // Update the fields of the appointment as necessary
+
+        if (citaExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualizar los campos de la cita según sea necesario
         citaExistente.setEstado_cita(citas.getEstado_cita());
-        // Update other fields of the appointment as necessary
+        // Actualizar otros campos de la cita según sea necesario
+
         Citas citaActualizada = citasService.ModificarCita(citaExistente);
         return ResponseEntity.ok(citaActualizada);
     }
+
 
     @DeleteMapping("CancelarCita/{id}")
     public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
