@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -44,7 +45,7 @@ public class Especialista {
     private String contraseña;
 
     @Column(name = "fecha_registro")
-    private LocalDateTime fecha_registro;
+    private Date fecha_registro;
 
     public int getIdentificacion_especialista() {
         return identificacion_especialista;
@@ -126,16 +127,16 @@ public class Especialista {
         this.contraseña = contraseña;
     }
 
-    public LocalDateTime getFecha_registro() {
+    public Date getFecha_registro() {
         return fecha_registro;
     }
 
-    public void setFecha_registro(LocalDateTime fecha_registro) {
+    public void setFecha_registro(Date fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
 
     public Especialista() {
-        this.fecha_registro = LocalDateTime.now();
+        this.fecha_registro = new Date();
     }
 
 }
