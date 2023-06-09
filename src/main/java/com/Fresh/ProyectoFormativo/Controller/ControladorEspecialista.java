@@ -23,8 +23,6 @@ public class ControladorEspecialista {
     private EspecialistaService especialistaService;
 
     private EspecialistaVCService especialistaVCService;
-    @Autowired
-    private EspecialistaServiceIMPL impl;
 
     @Autowired
     public ControladorEspecialista(EspecialistaVCService especialistaVCService, EspecialistaService especialistaService) {
@@ -84,7 +82,7 @@ public class ControladorEspecialista {
 
     @PostMapping("/CrearEspecialista")
     public ResponseEntity<?> crearEspecialista(@RequestBody Especialista especialista) {
-        Especialista especialistaCreado = this.impl.CrearEspecialista(especialista);
+        Especialista especialistaCreado = this.especialistaService.CrearEspecialista(especialista);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Especialista creado con éxito");
         response.put("especialistaCreado", especialistaCreado);
@@ -94,7 +92,7 @@ public class ControladorEspecialista {
     @PutMapping
     @RequestMapping(value = "/ModificarEspecialista",method = RequestMethod.PUT)
     public ResponseEntity<?>ModificarEspecialista(@RequestBody Especialista especialista){
-        Especialista EspecialistaModificado=this.impl.ModificarEspecialista(especialista);
+        Especialista EspecialistaModificado=this.especialistaService.ModificarEspecialista(especialista);
         String message = "Administrador modificado con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
@@ -105,7 +103,7 @@ public class ControladorEspecialista {
 
     @GetMapping("/BuscarEspecialista/{id}")
     public ResponseEntity<?> buscarEspecialista ( @PathVariable int id){
-        Especialista especialista = impl.BuscarEspecialista(id);
+        Especialista especialista = especialistaService.BuscarEspecialista(id);
         return ResponseEntity.ok(especialista);
     }
 
