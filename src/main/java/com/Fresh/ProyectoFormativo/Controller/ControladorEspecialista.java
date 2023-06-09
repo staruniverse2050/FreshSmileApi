@@ -83,10 +83,10 @@ public class ControladorEspecialista {
     @PostMapping("/CrearEspecialista")
     public ResponseEntity<?> crearEspecialista(@RequestBody Especialista especialista) {
         Especialista especialistaCreado = this.especialistaService.CrearEspecialista(especialista);
-        Map<String, Object> response = new HashMap<>();
+        /*Map<String, Object> response = new HashMap<>();
         response.put("message", "Especialista creado con éxito");
-        response.put("especialistaCreado", especialistaCreado);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        response.put("especialistaCreado", especialistaCreado);*/
+        return ResponseEntity.status(HttpStatus.CREATED).body("Especialista creado correctamente");
     }
 
     @PutMapping
