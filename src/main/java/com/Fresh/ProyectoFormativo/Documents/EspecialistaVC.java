@@ -18,11 +18,4 @@ public class EspecialistaVC {
     private Double Valoracion;
     private List<Number> votos;
     private List<Comentarios> Comentarios;
-
-    public EspecialistaVC(int identificacion_especialista){
-        this.identificacion_especialista = identificacion_especialista;
-        this.Valoracion = 0.0;
-        this.votos = new ArrayList<Number>();
-        this.Comentarios = new ArrayList<Comentarios>();
-    }
 }

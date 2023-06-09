@@ -31,16 +31,26 @@ public class ControladorEspecialista {
 
     //Especialista principal//
     @GetMapping("/ConsultarEspecialista")
-    public ResponseEntity<List<Especialista>> consultarEspecialista() {
+    public ResponseEntity<?> consultarEspecialista() {
         List<Especialista> especialista = especialistaService.ConsultarEspecialistas();
-        return ResponseEntity.ok(especialista);
+        List<EspecialistaVC> especialistaVCS = this.especialistaVCService.getAllEspecialist();
+        List<Object> response = new ArrayList<>();
+        if(especialista.size() > 0){
+            especialista.forEach(especialista1 -> {
+                Map<String, Object> data = new HashMap<>();
+                data.put("data", especialista1);
+                data.put("rating", especialistaVCS.stream().filter(especialistaVC -> especialistaVC.getIdentificacion_especialista() != especialista1.getIdentificacion_especialista()).findFirst().get());
+                response.add(data);
+            });q
+        }
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
     @RequestMapping(value = "/CrearEspecialista",method = RequestMethod.POST)
     public ResponseEntity<?>CrearEspecialista(@RequestBody Especialista especialista){
         Especialista EspecialistaCreado = this.especialistaService.CrearEspecialista(especialista);
-        EspecialistaVC createdEspecialistaVC = this.especialistaVCService.createEspecialst(new EspecialistaVC(especialista.getIdentificacion_especialista()));
+        EspecialistaVC createdEspecialistaVC = this.especialistaVCService.createEspecialst(new EspecialistaVC("", EspecialistaCreado.getIdentificacion_especialista(),0.0, new ArrayList<Number>(), new ArrayList<Comentarios>()));
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Administrador creado con éxito");
         Map<String, Object> data = new HashMap<>();
