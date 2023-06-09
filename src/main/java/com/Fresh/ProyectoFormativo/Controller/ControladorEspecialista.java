@@ -40,7 +40,7 @@ public class ControladorEspecialista {
     @RequestMapping(value = "/CrearEspecialista",method = RequestMethod.POST)
     public ResponseEntity<?>CrearEspecialista(@RequestBody Especialista especialista){
         Especialista EspecialistaCreado = this.especialistaService.CrearEspecialista(especialista);
-        EspecialistaVC createdEspecialistaVC = this.especialistaVCService.createEspecialst(new EspecialistaVC("", EspecialistaCreado.getIdentificacion_especialista(),0.0, new ArrayList<Number>(), new ArrayList<Comentarios>()));
+        EspecialistaVC createdEspecialistaVC = this.especialistaVCService.createEspecialst(new EspecialistaVC(EspecialistaCreado.getIdentificacion_especialista()));
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Administrador creado con éxito");
         Map<String, Object> data = new HashMap<>();
