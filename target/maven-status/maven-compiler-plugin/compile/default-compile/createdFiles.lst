@@ -10,6 +10,7 @@ com\Fresh\ProyectoFormativo\Service\PacienteServiceIMPL\PacienteServiceIMPL.clas
 com\Fresh\ProyectoFormativo\Service\CitasServiceIMPL\CitasServiceIMPL.class
 com\Fresh\ProyectoFormativo\Entity\Paciente.class
 com\Fresh\ProyectoFormativo\Entity\Especialista.class
+com\Fresh\ProyectoFormativo\Controller\ControladorProcedimientos.class
 com\Fresh\ProyectoFormativo\Service\ProcedimientoServiceIMPL\ProcedimientoServiceIMPL.class
 com\Fresh\ProyectoFormativo\Entity\Codigo_administrador.class
 com\Fresh\ProyectoFormativo\Controller\ControladorCitas.class
@@ -20,12 +21,13 @@ com\Fresh\ProyectoFormativo\Entity\Citas.class
 com\Fresh\ProyectoFormativo\Repository\CitasRepo.class
 com\Fresh\ProyectoFormativo\Documents\Especialistas.class
 com\Fresh\ProyectoFormativo\Repository\ProcedimientoRepo.class
+com\Fresh\ProyectoFormativo\Service\EspecialistaService.class
 com\Fresh\ProyectoFormativo\Service\CitasService.class
 com\Fresh\ProyectoFormativo\Controller\ControladorPaciente.class
 com\Fresh\ProyectoFormativo\Repository\EspecialistaRepo.class
 com\Fresh\ProyectoFormativo\ProyectoFormativoApplication.class
 com\Fresh\ProyectoFormativo\Controller\ControladorCodigo_administrador.class
-com\Fresh\ProyectoFormativo\Controller\ControladorTipo_cita.class
 com\Fresh\ProyectoFormativo\Service\EspecialistaVCService.class
 com\Fresh\ProyectoFormativo\Service\EspecialistaVCIMPL\EspecialistaVCIMPL.class
 com\Fresh\ProyectoFormativo\Controller\ControladorEspecialista$DeleteResult.class
+com\Fresh\ProyectoFormativo\Service\EspecialistaServiceIMPL\EspecialistaServiceIMPL.class
