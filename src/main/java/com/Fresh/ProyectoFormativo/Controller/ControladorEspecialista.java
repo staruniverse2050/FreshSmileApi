@@ -41,7 +41,7 @@ public class ControladorEspecialista {
                 data.put("data", especialista1);
                 data.put("rating", especialistaVCS.stream().filter(especialistaVC -> especialistaVC.getIdentificacion_especialista() != especialista1.getIdentificacion_especialista()).findFirst().get());
                 response.add(data);
-            });q
+            });
         }
         return ResponseEntity.ok(response);
     }
