@@ -31,19 +31,9 @@ public class ControladorEspecialista {
 
     //Especialista principal//
     @GetMapping("/ConsultarEspecialista")
-    public ResponseEntity<?> consultarEspecialista() {
+    public ResponseEntity<List<Especialista>> consultarEspecialista() {
         List<Especialista> especialista = especialistaService.ConsultarEspecialistas();
-        List<EspecialistaVC> especialistaVCS = this.especialistaVCService.getAllEspecialist();
-        List<Object> response = new ArrayList<>();
-        if(especialista.size() > 0){
-            especialista.forEach(especialista1 -> {
-                Map<String, Object> data = new HashMap<>();
-                data.put("data", especialista1);
-                data.put("rating", especialistaVCS.stream().filter(especialistaVC -> especialistaVC.getIdentificacion_especialista() != especialista1.getIdentificacion_especialista()).findFirst().get());
-                response.add(data);
-            });
-        }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(especialista);
     }
 
     @PostMapping
