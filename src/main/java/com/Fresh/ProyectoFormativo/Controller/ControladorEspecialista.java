@@ -52,7 +52,7 @@ public class ControladorEspecialista {
         return ResponseEntity.ok(especialistaVCs);
     }
 
-    @PatchMapping("/comentar")
+    @PatchMapping("/comentar/{especialistId}")
     public ResponseEntity<?> CommentEspecialist(@PathVariable String especialistId, @RequestBody ReqCommentModel newComment){
         Claims claims = jwtUtils.getTokenClaims(((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").replace("Bearer ", ""));
         Comentarios newCommentSave = new Comentarios(newComment.getContent(), claims.get("userId").toString());
