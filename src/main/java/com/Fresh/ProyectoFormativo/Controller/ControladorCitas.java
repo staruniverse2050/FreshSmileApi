@@ -42,17 +42,17 @@ public class ControladorCitas {
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping
-    @RequestMapping(value = "/ModificarCita",method = RequestMethod.PUT)
-    public ResponseEntity<?>ModificarCitas(@RequestBody Citas citas){
-        Citas CitaModificada=this.impl.ModificarCita(citas);
+    @PutMapping("/ModificarCita")
+    public ResponseEntity<?> modificarCitas(@RequestBody Citas citas) {
+        Citas citaModificada = this.impl.ModificarCita(citas);
         String message = "Cita modificada con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
-        response.put("cita", CitaModificada);
+        response.put("cita", citaModificada);
         return ResponseEntity.ok().body(response);
     }
-    
+
+
 
     @DeleteMapping("CancelarCita/{id}")
     public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
