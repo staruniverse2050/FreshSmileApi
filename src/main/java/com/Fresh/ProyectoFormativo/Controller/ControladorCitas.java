@@ -41,29 +41,24 @@ public class ControladorCitas {
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping("/ModificarCita/{id}")
-    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citasModificadas) {
-        Citas citaExistente = citasService.BuscarCita(id);
-
-        if (citaExistente == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // Actualizar los campos de la citaExistente con los valores de las citasModificadas
-        citaExistente.setNumero_documento(citasModificadas.getNumero_documento());
-        // Actualizar otros campos de la citaExistente según sea necesario
-
-        Citas citaActualizada = citasService.ModificarCita(citaExistente);
-        return ResponseEntity.ok(citaActualizada);
+    @PutMapping
+    @RequestMapping(value = "/ModificarCita",method = RequestMethod.PUT)
+    public ResponseEntity<?>ModificarCitas(@RequestBody Citas citas){
+        Citas CitaModificada=this.citasService.ModificarCita(citas);
+        String message = "Cita modificada con éxito.";
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", message);
+        response.put("cita", CitaModificada);
+        return ResponseEntity.ok().body(response);
     }
 
 
 
     @DeleteMapping("CancelarCita/{id}")
     public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
-        Citas citaDesactivada = impl.BuscarCita(id);
+        Citas citaDesactivada = citasService.BuscarCita(id);
         citaDesactivada.setEstado(false);
-        impl.ModificarCita(citaDesactivada);
+        citasService.ModificarCita(citaDesactivada);
 
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Cita desactivada con éxito");

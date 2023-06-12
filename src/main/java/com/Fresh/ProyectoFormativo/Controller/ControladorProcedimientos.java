@@ -1,5 +1,6 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
+import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import com.Fresh.ProyectoFormativo.Entity.Procedimiento;
 import com.Fresh.ProyectoFormativo.Service.ProcedimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/FreshSmile")
 public class ControladorProcedimientos {
@@ -32,22 +36,17 @@ public class ControladorProcedimientos {
             return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
         }
 
-    @PutMapping("/ModificarProcedimiento/{id}")
-    public ResponseEntity<Procedimiento> modificarProcedimiento(@PathVariable int id, @RequestBody Procedimiento procedimientoModificado) {
-        Procedimiento procedimientoExistente = procedimientoService.BuscarProcedimiento(id);
-
-        if (procedimientoExistente == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // Actualizar los campos del procedimientoExistente con los valores del procedimientoModificado
-        procedimientoExistente.setNombre(procedimientoModificado.getNombre());
-        procedimientoExistente.setDescripcion(procedimientoModificado.getDescripcion());
-        procedimientoExistente.setCosto(procedimientoModificado.getCosto());
-
-        Procedimiento procedimientoActualizado = procedimientoService.ModificarProcedimiento(procedimientoExistente);
-        return ResponseEntity.ok(procedimientoActualizado);
+    @PutMapping
+    @RequestMapping(value = "/ModificarProcedimiento",method = RequestMethod.PUT)
+    public ResponseEntity<?>ModificarProcedimiento(@RequestBody Procedimiento procedimiento){
+        Procedimiento ProcedimientoModificado=this.procedimientoService.ModificarProcedimiento(procedimiento);
+        String message = "Procedimiento modificado con éxito.";
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", message);
+        response.put("procedimiento", ProcedimientoModificado);
+        return ResponseEntity.ok().body(response);
     }
+
 
     @DeleteMapping("/EliminarProcedimiento/{id}")
         public ResponseEntity<String> eliminarProcedimiento(@PathVariable int id) {
