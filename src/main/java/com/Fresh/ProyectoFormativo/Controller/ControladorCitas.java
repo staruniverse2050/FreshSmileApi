@@ -6,7 +6,6 @@ import com.Fresh.ProyectoFormativo.Entity.Procedimiento;
 import com.Fresh.ProyectoFormativo.Service.CitasService;
 import com.Fresh.ProyectoFormativo.Service.CitasServiceIMPL.CitasServiceIMPL;
 import com.Fresh.ProyectoFormativo.Service.PacienteServiceIMPL.PacienteServiceIMPL;
-import com.Fresh.ProyectoFormativo.Service.ProcedimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,10 @@ public class ControladorCitas {
         this.citasService = citasService;
     }
 
+
+    @Autowired
+    private CitasServiceIMPL impl;
+
     @GetMapping("/ConsultarCitas")
     public ResponseEntity<List<Citas>> consultarCitas() {
         List<Citas> citas = citasService.ConsultarCitas();
@@ -41,23 +44,21 @@ public class ControladorCitas {
 
     @PutMapping
     @RequestMapping(value = "/ModificarCita",method = RequestMethod.PUT)
-    public ResponseEntity<?>ModificarCita(@RequestBody Citas citas){
-        Citas CitaModificada=this.citasService.ModificarCita(citas);
+    public ResponseEntity<?>ModificarCitas(@RequestBody Citas citas){
+        Citas CitaModificada=this.impl.ModificarCita(citas);
         String message = "Cita modificada con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
         response.put("cita", CitaModificada);
         return ResponseEntity.ok().body(response);
     }
-
-
-
+    
 
     @DeleteMapping("CancelarCita/{id}")
     public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
-        Citas citaDesactivada = citasService.BuscarCita(id);
+        Citas citaDesactivada = impl.BuscarCita(id);
         citaDesactivada.setEstado(false);
-        citasService.ModificarCita(citaDesactivada);
+        impl.ModificarCita(citaDesactivada);
 
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Cita desactivada con éxito");
