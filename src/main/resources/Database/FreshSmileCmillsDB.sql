@@ -329,7 +329,7 @@ DELIMITER $$
 
 CREATE PROCEDURE ModificarEstadoCita(
     IN p_id_cita INT,
-    IN p_estado_cita ENUM('Realizada', 'No asistida'),
+    IN p_estado_cita ENUM('Realizada', 'No asistida')
 )
 BEGIN
 UPDATE citas
@@ -445,7 +445,7 @@ CALL EliminarProcedimiento(2);
 
 CALL crear_cita(1094220208, 'Marlin Sanchez', 'Cédula de Ciudadanía', '2023-06-10', '10:00:00', 1094226206, 1106987459, 1, 'Realizada');
 CALL modificar_cita(2, 1094220287, 'Marlin Sanchez', 'Cédula de Ciudadanía', '2023-06-10', '10:00:00', 1094226206, 1106987459, 1, 'Realizada');
-CALL ModificarEstadoCita(1, 'Cancelada');
+CALL ModificarEstadoCita(1, 'No asistida');
 CALL ConsultarCitasFecha('2023-06-07');
 CALL ConsultarCitasRangoFechas('2023-06-01', '2023-06-30');
 CALL EliminarCita(1);
