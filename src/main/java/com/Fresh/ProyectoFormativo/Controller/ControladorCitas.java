@@ -25,8 +25,6 @@ public class ControladorCitas {
         this.citasService = citasService;
     }
 
-    @Autowired
-    private CitasServiceIMPL impl;
 
     @GetMapping("/ConsultarCitas")
     public ResponseEntity<List<Citas>> consultarCitas() {
@@ -41,24 +39,24 @@ public class ControladorCitas {
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping
-    @RequestMapping(value = "/ModificarCita",method = RequestMethod.PUT)
-    public ResponseEntity<?>ModificarCitas(@RequestBody Citas citas){
-        Citas CitaModificada=this.impl.ModificarCita(citas);
+    @PutMapping("/ModificarCita")
+    public ResponseEntity<?> modificarCitas(@RequestBody Citas citas) {
+        Citas citaModificada = this.citasService.ModificarCita(citas);
         String message = "Cita modificada con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
-        response.put("cita", CitaModificada);
+        response.put("cita", citaModificada);
         return ResponseEntity.ok().body(response);
     }
 
 
 
+
     @DeleteMapping("CancelarCita/{id}")
     public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
-        Citas citaDesactivada = impl.BuscarCita(id);
+        Citas citaDesactivada = citasService.BuscarCita(id);
         citaDesactivada.setEstado(false);
-        impl.ModificarCita(citaDesactivada);
+        citasService.ModificarCita(citaDesactivada);
 
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Cita desactivada con éxito");
