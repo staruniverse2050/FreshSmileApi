@@ -36,10 +36,13 @@ public class ControladorCitas {
     }
 
     @PostMapping("/CrearCita")
-    public ResponseEntity<String> crearCita(@RequestBody Citas citas) {
-        Citas nuevaCita = citasService.CrearCita(citas);
+    public ResponseEntity<?> crearCita(@RequestBody Citas citas) {
+        Citas created = this.citasService.CrearCita(citas);
         String mensaje = "Cita creada exitosamente"; // Success message
-        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
+        Map<String, Object> response = new HashMap<>();
+        response.put("created", created);
+        response.put("message", mensaje);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/ModificarCita/{id}")
