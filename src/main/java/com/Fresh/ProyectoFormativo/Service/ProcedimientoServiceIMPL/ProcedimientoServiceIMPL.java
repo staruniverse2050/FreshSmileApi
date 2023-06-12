@@ -3,9 +3,6 @@ package com.Fresh.ProyectoFormativo.Service.ProcedimientoServiceIMPL;
 import com.Fresh.ProyectoFormativo.Entity.Procedimiento;
 import com.Fresh.ProyectoFormativo.Repository.ProcedimientoRepo;
 import com.Fresh.ProyectoFormativo.Service.ProcedimientoService;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,19 +38,4 @@ public class ProcedimientoServiceIMPL implements ProcedimientoService {
     public void EliminarProcedimiento(int id) {
         this.repo.deleteById(id);
     }
-
-    @Override
-    public Procedimiento BuscarProcedimientoPorNombre(String nombreProcedimiento) {
-        String jpql = "SELECT p FROM Procedimiento p WHERE p.nombre = :nombre";
-        Session entityManager = null;
-        TypedQuery<Procedimiento> query = entityManager.createQuery(jpql, Procedimiento.class);
-        query.setParameter("nombre", nombreProcedimiento);
-
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null; // Si no se encuentra el procedimiento con el nombre dado
-        }
-    }
-
 }

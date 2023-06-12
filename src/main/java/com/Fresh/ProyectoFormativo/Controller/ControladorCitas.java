@@ -2,6 +2,7 @@ package com.Fresh.ProyectoFormativo.Controller;
 
 import com.Fresh.ProyectoFormativo.Entity.Citas;
 import com.Fresh.ProyectoFormativo.Entity.Paciente;
+import com.Fresh.ProyectoFormativo.Entity.Procedimiento;
 import com.Fresh.ProyectoFormativo.Service.CitasService;
 import com.Fresh.ProyectoFormativo.Service.CitasServiceIMPL.CitasServiceIMPL;
 import com.Fresh.ProyectoFormativo.Service.PacienteServiceIMPL.PacienteServiceIMPL;
@@ -40,21 +41,11 @@ public class ControladorCitas {
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping("/ModificarCita")
-    public ResponseEntity<Citas> modificarCita(@RequestBody Citas citas) {
-        int id = citas.getIdentificacion_citas(); // Obtén el ID de la cita del objeto Citas
-
+    @PutMapping("/ModificarCita/{id}")
+    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
         Citas citaExistente = citasService.BuscarCita(id);
-
-        if (citaExistente == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // Actualizar los campos de la cita según sea necesario
-        citaExistente.setEstado_cita(citas.getEstado_cita());
-        // Actualizar otros campos de la cita según sea necesario
-
-        Citas citaActualizada = citasService.ModificarCita(citaExistente);
+        citas.setNumero_documento(citas.getNumero_documento());
+        Citas citaActualizada = citasService.ModificarCita(citas);
         return ResponseEntity.ok(citaActualizada);
     }
 

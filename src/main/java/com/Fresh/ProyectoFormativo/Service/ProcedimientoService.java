@@ -10,6 +10,4 @@ public interface ProcedimientoService {
     Procedimiento ModificarProcedimiento(Procedimiento procedimiento);
     Procedimiento BuscarProcedimiento(int id);
     void EliminarProcedimiento(int id);
-
-    Procedimiento BuscarProcedimientoPorNombre(String nombreProcedimiento);
 }

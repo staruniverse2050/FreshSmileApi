@@ -3,6 +3,7 @@ package com.Fresh.ProyectoFormativo.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Entity
@@ -22,7 +23,8 @@ public class Procedimiento {
     private String descripcion;
 
     @Column(name = "costo")
-    private BigInteger costo;
+    private BigDecimal costo;
+
 
     public int getIdentificacion_procedimientos() {
         return identificacion_procedimientos;
@@ -48,11 +50,11 @@ public class Procedimiento {
         this.descripcion = descripcion;
     }
 
-    public BigInteger getCosto() {
+    public BigDecimal getCosto() {
         return costo;
     }
 
-    public void setCosto(BigInteger costo) {
+    public void setCosto(BigDecimal costo) {
         this.costo = costo;
     }
 }
