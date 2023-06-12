@@ -139,7 +139,7 @@ public class Citas {
 
     public String getEstado() {
         if (Estado) {
-            return "Activa";
+            return "Agendada";
         } else {
             return "Cancelada";
         }
