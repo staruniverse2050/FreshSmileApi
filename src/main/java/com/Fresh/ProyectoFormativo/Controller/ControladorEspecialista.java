@@ -38,6 +38,12 @@ public class ControladorEspecialista {
         return ResponseEntity.ok(especialista);
     }
 
+    @GetMapping("/ConsultarRating")
+    public ResponseEntity<?> GetRatingEspecialists(){
+        List<EspecialistaVC> especialistaVCs = especialistaVCService.getAllEspecialist();
+        return ResponseEntity.ok(especialistaVCs);
+    }
+
     @PostMapping("/CrearEspecialista")
     public ResponseEntity<?> crearEspecialista(@RequestBody Especialista especialista) {
         Especialista especialistaCreado = this.especialistaService.CrearEspecialista(especialista);
