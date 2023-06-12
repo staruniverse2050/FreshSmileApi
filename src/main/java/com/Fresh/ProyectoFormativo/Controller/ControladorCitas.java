@@ -21,10 +21,9 @@ public class ControladorCitas {
     private final CitasService citasService;
 
     @Autowired
-    public  ControladorCitas( CitasService citasService) {
+    public ControladorCitas(CitasService citasService) {
         this.citasService = citasService;
     }
-
 
     @Autowired
     private CitasServiceIMPL impl;
@@ -42,16 +41,13 @@ public class ControladorCitas {
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping("/ModificarCita")
-    public ResponseEntity<?> modificarCitas(@RequestBody Citas citas) {
-        Citas citaModificada = this.citasService.ModificarCita(citas);
-        String message = "Cita modificada con éxito.";
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", message);
-        response.put("cita", citaModificada);
-        return ResponseEntity.ok().body(response);
+    @PutMapping("/ModificarCita/{id}")
+    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
+        Citas citaExistente = citasService.BuscarCita(id);
+        citas.setNumero_documento(citas.getNumero_documento());
+        Citas citaActualizada = citasService.ModificarCita(citas);
+        return ResponseEntity.ok(citaActualizada);
     }
-
 
 
     @DeleteMapping("CancelarCita/{id}")

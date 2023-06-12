@@ -1,6 +1,7 @@
 package com.Fresh.ProyectoFormativo.Service.CitasServiceIMPL;
 
 import com.Fresh.ProyectoFormativo.Entity.Citas;
+import com.Fresh.ProyectoFormativo.Entity.Procedimiento;
 import com.Fresh.ProyectoFormativo.Repository.CitasRepo;
 import com.Fresh.ProyectoFormativo.Service.CitasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class CitasServiceIMPL implements CitasService {
     public Citas ModificarCita(Citas citas) {
         return this.repo.save(citas);
     }
+
 
     @Override
     public Citas BuscarCita(int id) {
