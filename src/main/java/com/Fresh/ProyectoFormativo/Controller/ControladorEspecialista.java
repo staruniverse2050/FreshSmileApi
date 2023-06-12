@@ -4,15 +4,21 @@ import com.Fresh.ProyectoFormativo.Documents.Comentarios;
 import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
 import com.Fresh.ProyectoFormativo.Entity.Especialista;
 import com.Fresh.ProyectoFormativo.Entity.Paciente;
+import com.Fresh.ProyectoFormativo.Models.ReqCommentModel;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaServiceIMPL.EspecialistaServiceIMPL;
+import com.Fresh.ProyectoFormativo.utils.JWTUtils;
+
+import io.jsonwebtoken.Claims;
+
 import com.Fresh.ProyectoFormativo.Service.EspecialistaVCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +30,8 @@ public class ControladorEspecialista {
     private EspecialistaService especialistaService;
 
     private EspecialistaVCService especialistaVCService;
+
+    private JWTUtils jwtUtils = new JWTUtils();
 
     @Autowired
     public ControladorEspecialista(EspecialistaVCService especialistaVCService, EspecialistaService especialistaService) {
@@ -42,6 +50,14 @@ public class ControladorEspecialista {
     public ResponseEntity<?> GetRatingEspecialists(){
         List<EspecialistaVC> especialistaVCs = especialistaVCService.getAllEspecialist();
         return ResponseEntity.ok(especialistaVCs);
+    }
+
+    @PatchMapping("/comentar")
+    public ResponseEntity<?> CommentEspecialist(@PathVariable String especialistId, @RequestBody ReqCommentModel newComment){
+        Claims claims = jwtUtils.getTokenClaims(((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").replace("Bearer ", ""));
+        Comentarios newCommentSave = new Comentarios(newComment.getContent(), claims.get("userId").toString());
+        EspecialistaVC commentedEspecialistaVC = this.especialistaVCService.comentEspecialist(newCommentSave, especialistId);
+        return ResponseEntity.ok(commentedEspecialistaVC);
     }
 
     @PostMapping("/CrearEspecialista")
