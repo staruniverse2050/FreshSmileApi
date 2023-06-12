@@ -26,6 +26,7 @@ public class Procedimiento {
     private BigDecimal costo;
 
 
+
     public int getIdentificacion_procedimientos() {
         return identificacion_procedimientos;
     }

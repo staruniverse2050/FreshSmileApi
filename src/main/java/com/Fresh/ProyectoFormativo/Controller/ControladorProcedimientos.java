@@ -32,15 +32,24 @@ public class ControladorProcedimientos {
             return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
         }
 
-        @PutMapping("/ModificarProcedimiento/{id}")
-        public ResponseEntity<Procedimiento> modificarProcedimiento(@PathVariable int id, @RequestBody Procedimiento procedimiento) {
-            Procedimiento procedimientoExistente = procedimientoService.BuscarProcedimiento(id);
-            procedimiento.setNombre(procedimiento.getNombre());
-            Procedimiento procedimientoActualizado = procedimientoService.ModificarProcedimiento(procedimiento);
-            return ResponseEntity.ok(procedimientoActualizado);
+    @PutMapping("/ModificarProcedimiento/{id}")
+    public ResponseEntity<Procedimiento> modificarProcedimiento(@PathVariable int id, @RequestBody Procedimiento procedimientoModificado) {
+        Procedimiento procedimientoExistente = procedimientoService.BuscarProcedimiento(id);
+
+        if (procedimientoExistente == null) {
+            return ResponseEntity.notFound().build();
         }
 
-        @DeleteMapping("/EliminarProcedimiento/{id}")
+        // Actualizar los campos del procedimientoExistente con los valores del procedimientoModificado
+        procedimientoExistente.setNombre(procedimientoModificado.getNombre());
+        procedimientoExistente.setDescripcion(procedimientoModificado.getDescripcion());
+        procedimientoExistente.setCosto(procedimientoModificado.getCosto());
+
+        Procedimiento procedimientoActualizado = procedimientoService.ModificarProcedimiento(procedimientoExistente);
+        return ResponseEntity.ok(procedimientoActualizado);
+    }
+
+    @DeleteMapping("/EliminarProcedimiento/{id}")
         public ResponseEntity<String> eliminarProcedimiento(@PathVariable int id) {
             procedimientoService.EliminarProcedimiento(id);
             String mensaje = "Procedimiento eliminado exitosamente";

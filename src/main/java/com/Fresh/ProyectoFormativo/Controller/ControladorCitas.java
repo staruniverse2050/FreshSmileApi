@@ -42,12 +42,21 @@ public class ControladorCitas {
     }
 
     @PutMapping("/ModificarCita/{id}")
-    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
+    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citasModificadas) {
         Citas citaExistente = citasService.BuscarCita(id);
-        citas.setNumero_documento(citas.getNumero_documento());
-        Citas citaActualizada = citasService.ModificarCita(citas);
+
+        if (citaExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Actualizar los campos de la citaExistente con los valores de las citasModificadas
+        citaExistente.setNumero_documento(citasModificadas.getNumero_documento());
+        // Actualizar otros campos de la citaExistente según sea necesario
+
+        Citas citaActualizada = citasService.ModificarCita(citaExistente);
         return ResponseEntity.ok(citaActualizada);
     }
+
 
 
     @DeleteMapping("CancelarCita/{id}")
