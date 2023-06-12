@@ -44,14 +44,18 @@ public class ControladorCitas {
 
     @PutMapping("/ModificarCita/{id}")
     public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
-        Citas citaExistente = citasService.BuscarCita(id); // Buscar la cita existente por su ID
-        citaExistente.setNumero_documento(citas.getNumero_documento()); // Modificar el número de documento de la cita existente
-        citaExistente.setNombre_completo(citas.getNombre_completo()); 
+        Citas citaExistente = citasService.BuscarCita(id);
+
+        // Modificar los campos relevantes de la cita existente
+        citaExistente.setNumero_documento(citas.getNumero_documento());
+        citaExistente.setNombre_completo(citas.getNombre_completo());
         citaExistente.setTipo_documento(citas.getTipo_documento());
         citaExistente.setEstado_cita(citas.getEstado_cita());
-        Citas citaActualizada = citasService.ModificarCita(citaExistente); // Guardar la cita actualizada en la base de datos
-        return ResponseEntity.ok(citaActualizada); // Devolver una respuesta HTTP 200 OK con la cita actualizada
+
+        Citas citaActualizada = citasService.ModificarCita(citaExistente);
+        return ResponseEntity.ok(citaActualizada);
     }
+
 
 
 
