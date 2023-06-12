@@ -59,7 +59,7 @@ CREATE TABLE citas (
                        id_paciente INT,
                        id_especialista INT,
                        id_procedimiento INT,
-                       estado_cita ENUM('Realizada', 'No asistida'),
+                       estado_cita ENUM('Programada','Realizada', 'Ausencia'),
                        estado BIT(1) DEFAULT 1,
                        fecha_de_creacion DATETIME DEFAULT NOW(),
                        FOREIGN KEY (id_paciente) REFERENCES paciente(identificacion_paciente),
@@ -272,7 +272,7 @@ CREATE PROCEDURE crear_cita(
     IN p_id_paciente INT,
     IN p_id_especialista INT,
     IN p_id_procedimiento INT,
-    IN p_estado_cita ENUM('Realizada', 'No asistida')
+    IN p_estado_cita ENUM('Programada','Realizada', 'Ausencia')
 )
 BEGIN
 INSERT INTO citas(numero_documento, nombre_completo, tipo_documento, fecha, hora, id_paciente, id_especialista, id_procedimiento, estado_cita)
@@ -293,7 +293,7 @@ CREATE PROCEDURE modificar_cita(
     IN p_id_paciente INT,
     IN p_id_especialista INT,
     IN p_id_procedimiento INT,
-    IN p_estado_cita ENUM('Realizada', 'No asistida')
+    IN p_estado_cita ENUM('Programada','Realizada', 'Ausencia')
 )
 BEGIN
 UPDATE citas
@@ -329,7 +329,7 @@ DELIMITER $$
 
 CREATE PROCEDURE ModificarEstadoCita(
     IN p_id_cita INT,
-    IN p_estado_cita ENUM('Realizada', 'No asistida')
+    IN p_estado_cita ENUM('Programada','Realizada', 'Ausencia')
 )
 BEGIN
 UPDATE citas
@@ -416,7 +416,7 @@ VALUES ('Limpieza dental', 'Procedimiento de limpieza y remoción de placa denta
 
 -- Datos de citas
 INSERT INTO citas (numero_documento, tipo_documento, nombre_completo, fecha, hora, id_paciente, id_especialista, id_procedimiento, estado_cita)
-VALUES (123456789, 'Cédula de Ciudadanía', 'Juan Pérez', '2023-06-06', '10:00:00', 1094226206, 1106987459, 1, 'No asistida');
+VALUES (123456789, 'Cédula de Ciudadanía', 'Juan Pérez', '2023-06-06', '10:00:00', 1094226206, 1106987459, 1, 'Ausencia');
 
 INSERT INTO Codigo_Administrador (codigo)
 VALUES ('ABC123');
@@ -428,7 +428,7 @@ SELECT * FROM citas;
 
 CALL ConsultarPacientePorIdentificacion(1094226206);
 CALL CrearPaciente(1163258795, 'Tarjeta de Identidad', 'Juan Perez', '3204698795', 'Calle Principal 123', 'juanito@yahoo.com', '12345678');
-CALL ModificarPaciente(1163258795, 'Tarjeta de Identidad', 'Juan Colón', '3204698795', 'Calle Principal 456', 'juanitodino@example.com', '12345678');
+CALL ModificarPaciente(1163258795, 'Tarjeta de Identidad', 'Juan Colón', '3204698795', 'Calle Principal 456', 'juanitodino@gmail.com', '12345678');
 CALL EliminarPaciente(1163258795);
 
 
@@ -445,7 +445,7 @@ CALL EliminarProcedimiento(2);
 
 CALL crear_cita(1094220208, 'Marlin Sanchez', 'Cédula de Ciudadanía', '2023-06-10', '10:00:00', 1094226206, 1106987459, 1, 'Realizada');
 CALL modificar_cita(2, 1094220287, 'Marlin Sanchez', 'Cédula de Ciudadanía', '2023-06-10', '10:00:00', 1094226206, 1106987459, 1, 'Realizada');
-CALL ModificarEstadoCita(1, 'No asistida');
+CALL ModificarEstadoCita(1, 'Programada');
 CALL ConsultarCitasFecha('2023-06-07');
 CALL ConsultarCitasRangoFechas('2023-06-01', '2023-06-30');
 CALL EliminarCita(1);
