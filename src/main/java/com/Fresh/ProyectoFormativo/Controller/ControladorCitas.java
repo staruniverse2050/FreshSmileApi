@@ -6,6 +6,7 @@ import com.Fresh.ProyectoFormativo.Entity.Procedimiento;
 import com.Fresh.ProyectoFormativo.Service.CitasService;
 import com.Fresh.ProyectoFormativo.Service.CitasServiceIMPL.CitasServiceIMPL;
 import com.Fresh.ProyectoFormativo.Service.PacienteServiceIMPL.PacienteServiceIMPL;
+import com.Fresh.ProyectoFormativo.Service.ProcedimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,9 @@ public class ControladorCitas {
     private final CitasService citasService;
 
     @Autowired
-    public ControladorCitas(CitasService citasService) {
+    public  ControladorCitas( CitasService citasService) {
         this.citasService = citasService;
     }
-
 
     @GetMapping("/ConsultarCitas")
     public ResponseEntity<List<Citas>> consultarCitas() {
@@ -39,13 +39,14 @@ public class ControladorCitas {
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping("/ModificarCita")
-    public ResponseEntity<?> modificarCitas(@RequestBody Citas citas) {
-        Citas citaModificada = citasService.ModificarCita(citas);
+    @PutMapping
+    @RequestMapping(value = "/ModificarCita",method = RequestMethod.PUT)
+    public ResponseEntity<?>ModificarCita(@RequestBody Citas citas){
+        Citas CitaModificada=this.citasService.ModificarCita(citas);
         String message = "Cita modificada con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
-        response.put("cita", citaModificada);
+        response.put("cita", CitaModificada);
         return ResponseEntity.ok().body(response);
     }
 
