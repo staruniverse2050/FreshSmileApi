@@ -44,7 +44,7 @@ public class ControladorCitas {
     @PutMapping
     @RequestMapping(value = "/ModificarCita",method = RequestMethod.PUT)
     public ResponseEntity<?>ModificarCitas(@RequestBody Citas citas){
-        Citas CitaModificada=this.citasService.ModificarCita(citas);
+        Citas CitaModificada=this.impl.ModificarCita(citas);
         String message = "Cita modificada con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
@@ -56,9 +56,9 @@ public class ControladorCitas {
 
     @DeleteMapping("CancelarCita/{id}")
     public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
-        Citas citaDesactivada = citasService.BuscarCita(id);
+        Citas citaDesactivada = impl.BuscarCita(id);
         citaDesactivada.setEstado(false);
-        citasService.ModificarCita(citaDesactivada);
+        impl.ModificarCita(citaDesactivada);
 
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Cita desactivada con éxito");
