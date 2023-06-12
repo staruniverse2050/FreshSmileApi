@@ -31,6 +31,7 @@ CREATE TABLE especialista (
                               foto_perfil BLOB,
                               correo VARCHAR(100),
                               contraseña VARCHAR(100),
+                              estado BIT(1) DEFAULT 1,
                               fecha_registro DATETIME DEFAULT NOW()
 );
 

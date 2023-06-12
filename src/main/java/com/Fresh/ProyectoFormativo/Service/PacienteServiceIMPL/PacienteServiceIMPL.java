@@ -15,6 +15,12 @@ public class PacienteServiceIMPL implements PacienteService {
 
     @Autowired
     private PacienteRepo repo;
+
+    @Override
+    public Paciente ConsultarPacientePorEmail(String email) {
+        return this.repo.getPacienteByCorreo(email);
+    }
+
     @Override
     public List<Paciente> ConsultarPaciente() {
         return (List<Paciente>)this.repo.findAll();

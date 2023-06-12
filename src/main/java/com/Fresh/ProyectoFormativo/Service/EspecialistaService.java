@@ -6,6 +6,7 @@ import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import java.util.List;
 
 public interface EspecialistaService {
+    public Especialista ConsultarEspecialistaPorEmail(String email);
     public List<Especialista> ConsultarEspecialistas();
     public Especialista CrearEspecialista(Especialista especialista);
     public Especialista ModificarEspecialista(Especialista especialista);

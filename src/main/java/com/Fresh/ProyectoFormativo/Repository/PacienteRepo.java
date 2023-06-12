@@ -4,7 +4,7 @@ import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 
-public interface PacienteRepo extends CrudRepository<Paciente, Integer> {
+public interface PacienteRepo extends CrudRepository<Paciente, Integer>, PacienteCustomRepository {
 
     @Procedure("ConsultarPacientePorIdentificacion")
     Paciente findByPacientId(int Id);

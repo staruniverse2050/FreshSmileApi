@@ -4,7 +4,7 @@ import com.Fresh.ProyectoFormativo.Entity.Especialista;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 
-public interface EspecialistaRepo extends CrudRepository<Especialista,Integer> {
+public interface EspecialistaRepo extends CrudRepository<Especialista,Integer>, EspecialistaCustomRepository {
     @Procedure("ConsultarEspecialistaPorIdentificacion")
     Especialista findEspecialistById(int id);
     @Procedure("CrearEspecialista")

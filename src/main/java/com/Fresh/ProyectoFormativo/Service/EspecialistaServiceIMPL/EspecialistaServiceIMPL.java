@@ -15,6 +15,12 @@ public class EspecialistaServiceIMPL implements EspecialistaService {
     private EspecialistaRepo repo;
 
     @Override
+    public Especialista ConsultarEspecialistaPorEmail(String email) {
+        return this.repo.getEspecialistaByCorreo(email);
+    }
+
+
+    @Override
     public List<Especialista> ConsultarEspecialistas() {
         return (List<Especialista>) this.repo.findAll();
     }

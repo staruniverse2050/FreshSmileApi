@@ -19,7 +19,6 @@ com\Fresh\ProyectoFormativo\Service\Codigo_administradorServiceIMPL\Codigo_admin
 com\Fresh\ProyectoFormativo\Entity\Procedimiento.class
 com\Fresh\ProyectoFormativo\Entity\Citas.class
 com\Fresh\ProyectoFormativo\Repository\CitasRepo.class
-com\Fresh\ProyectoFormativo\Documents\Especialistas.class
 com\Fresh\ProyectoFormativo\Repository\ProcedimientoRepo.class
 com\Fresh\ProyectoFormativo\Service\EspecialistaService.class
 com\Fresh\ProyectoFormativo\Service\CitasService.class
@@ -29,5 +28,4 @@ com\Fresh\ProyectoFormativo\ProyectoFormativoApplication.class
 com\Fresh\ProyectoFormativo\Controller\ControladorCodigo_administrador.class
 com\Fresh\ProyectoFormativo\Service\EspecialistaVCService.class
 com\Fresh\ProyectoFormativo\Service\EspecialistaVCIMPL\EspecialistaVCIMPL.class
-com\Fresh\ProyectoFormativo\Controller\ControladorEspecialista$DeleteResult.class
 com\Fresh\ProyectoFormativo\Service\EspecialistaServiceIMPL\EspecialistaServiceIMPL.class
