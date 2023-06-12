@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/FreshSmile")
@@ -44,10 +45,11 @@ public class ControladorCitas {
     @PutMapping("/ModificarCita/{id}")
     public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
         Citas citaExistente = citasService.BuscarCita(id);
-        citas.setNumero_documento(citas.getNumero_documento());
-        Citas citaActualizada = citasService.ModificarCita(citas);
+        citaExistente.setNumero_documento(citas.getNumero_documento());
+        Citas citaActualizada = citasService.ModificarCita(citaExistente);
         return ResponseEntity.ok(citaActualizada);
     }
+
 
 
     @DeleteMapping("CancelarCita/{id}")
