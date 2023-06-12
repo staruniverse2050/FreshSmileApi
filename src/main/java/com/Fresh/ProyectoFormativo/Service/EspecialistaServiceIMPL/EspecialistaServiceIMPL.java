@@ -39,5 +39,10 @@ public class EspecialistaServiceIMPL implements EspecialistaService {
         this.repo.deleteById(id);
     }
 
-
+    @Autowired
+    private EntityManager entityManager;
+    @Transactional
+    public void actualizarEstadoEspecialista(Especialista especialista) {
+        entityManager.merge(especialista);
+    }
 }

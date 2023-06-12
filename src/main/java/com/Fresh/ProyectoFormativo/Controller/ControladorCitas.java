@@ -40,8 +40,10 @@ public class ControladorCitas {
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping("/ModificarCita/{id}")
-    public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
+    @PutMapping("/ModificarCita")
+    public ResponseEntity<Citas> modificarCita(@RequestBody Citas citas) {
+        int id = citas.getIdentificacion_citas(); // Obtén el ID de la cita del objeto Citas
+
         Citas citaExistente = citasService.BuscarCita(id);
 
         if (citaExistente == null) {

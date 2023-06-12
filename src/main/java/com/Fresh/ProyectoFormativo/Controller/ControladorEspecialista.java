@@ -3,6 +3,7 @@ package com.Fresh.ProyectoFormativo.Controller;
 import com.Fresh.ProyectoFormativo.Documents.Comentarios;
 import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
 import com.Fresh.ProyectoFormativo.Entity.Especialista;
+import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaServiceIMPL.EspecialistaServiceIMPL;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaVCService;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("FreshSmile/Especialistas")
@@ -64,18 +66,53 @@ public class ControladorEspecialista {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping("/ConsultarEspecialistasOff")
+    public ResponseEntity<List<Especialista>> listarEspecialistaDesactivados() {
+        List<Especialista> especialistasDesactivados = especialistaService.ConsultarEspecialistas().stream()
+                .filter(especialista -> especialista.getEstado().equalsIgnoreCase("Desactivo"))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(especialistasDesactivados);
+    }
+
 
     @GetMapping("/BuscarEspecialista/{id}")
-    public ResponseEntity<?> buscarEspecialista ( @PathVariable int id){
+    public ResponseEntity<?> buscarEspecialista(@PathVariable int id) {
         Especialista especialista = especialistaService.BuscarEspecialista(id);
+        if (especialista == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (!especialista.getEstado().equalsIgnoreCase("Activo")) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Este especialista se encuentra innactivo");
+            return ResponseEntity.ok(response);
+        }
         return ResponseEntity.ok(especialista);
     }
 
+
     @DeleteMapping("/EliminarEspecialista/{id}")
-    public ResponseEntity<String> eliminarEspecialista(@PathVariable int id) {
-        especialistaService.EliminarEspecialista(id);
-        String mensaje = "Especialista eliminado exitosamente"; // Mensaje de éxito
-        return ResponseEntity.noContent().header("Message", mensaje).build();
+    public ResponseEntity<Map<String, Object>> desactivarEspecialista(@PathVariable int id) {
+        Especialista especialistaDesactivado = especialistaService.BuscarEspecialista(id);
+        especialistaDesactivado.setEstado(false); // Establecer el estado del paciente como inactivo
+        especialistaService.ModificarEspecialista(especialistaDesactivado); // Actualizar el registro del paciente en la base de datos
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Paciente desactivado con éxito");
+        response.put("pacienteDesactivado", especialistaDesactivado);
+
+        return ResponseEntity.ok().body(response);
+    }
+    @PutMapping("/ActivarEspecialista/{id}")
+    public ResponseEntity<Map<String, Object>> activarEspecialista(@PathVariable int id) {
+        Especialista especialistaActivado = especialistaService.BuscarEspecialista(id);
+        especialistaActivado.setEstado(true); // Establecer el estado del paciente como activo
+        especialistaService.actualizarEstadoEspecialista(especialistaActivado); // Actualizar el registro del paciente en la base de datos
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Especialista activado con éxito");
+        response.put("especialistaActivado", especialistaActivado);
+
+        return ResponseEntity.ok().body(response);
     }
 
 }

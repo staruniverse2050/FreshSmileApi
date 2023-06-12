@@ -47,6 +47,8 @@ public class Especialista {
     @Column(name = "fecha_registro")
     private Date fecha_registro;
 
+    @Column(name = "estado")
+    private boolean Estado;
     public int getIdentificacion_especialista() {
         return identificacion_especialista;
     }
@@ -137,6 +139,20 @@ public class Especialista {
 
     public Especialista() {
         this.fecha_registro = new Date();
+        this.Estado = true;
     }
+
+
+    public String getEstado() {
+        if (Estado) {
+            return "Activo";
+        } else {
+            return "Desactivo";
+        }
+    }
+    public void setEstado(boolean Estado) {
+        this.Estado = Estado;
+    }
+
 
 }
