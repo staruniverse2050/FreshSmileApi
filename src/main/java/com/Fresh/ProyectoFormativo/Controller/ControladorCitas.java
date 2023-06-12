@@ -44,7 +44,7 @@ public class ControladorCitas {
 
     @PutMapping("/ModificarCita")
     public ResponseEntity<?> modificarCitas(@RequestBody Citas citas) {
-        Citas citaModificada = this.impl.ModificarCita(citas);
+        Citas citaModificada = this.citasService.ModificarCita(citas);
         String message = "Cita modificada con éxito.";
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
