@@ -46,10 +46,6 @@ public class ControladorCitas {
     public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
         Citas citaExistente = citasService.BuscarCita(id);
 
-        // Modificar los campos relevantes de la cita existente
-        citaExistente.setNumero_documento(citas.getNumero_documento());
-        citaExistente.setNombre_completo(citas.getNombre_completo());
-        citaExistente.setTipo_documento(citas.getTipo_documento());
         citaExistente.setEstado_cita(citas.getEstado_cita());
 
         Citas citaActualizada = citasService.ModificarCita(citaExistente);
