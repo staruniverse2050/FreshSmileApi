@@ -53,11 +53,34 @@ public class ControladorEspecialista {
     }
 
     @PatchMapping("/comentar/{especialistId}")
-    public ResponseEntity<?> CommentEspecialist(@RequestBody ReqCommentModel newComment, @PathVariable String especialistId){
-        Claims claims = jwtUtils.getTokenClaims(((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").replace("Bearer ", ""));
-        Comentarios newCommentSave = new Comentarios(newComment.getContent(), claims.get("userId").toString());
-        EspecialistaVC commentedEspecialistaVC = this.especialistaVCService.comentEspecialist(newCommentSave, especialistId);
-        return ResponseEntity.ok(commentedEspecialistaVC);
+    public ResponseEntity<?> CommentEspecialist(@RequestBody Comentarios newComment, @PathVariable String especialistId){
+        Map<String, Object> response = new HashMap<>();
+        try{
+            Claims claims = jwtUtils.getTokenClaims(((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").replace("Bearer ", ""));
+            newComment.setUserId(claims.get("userId").toString());
+            EspecialistaVC commentedEspecialistaVC = this.especialistaVCService.comentEspecialist(newComment, especialistId);
+            return ResponseEntity.ok(commentedEspecialistaVC);
+        }
+        catch(Exception ex){
+            response.put("cause",ex.getCause());
+            response.put("message", ex.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
+    @PatchMapping("/añadirVoto/{especialistId}")
+    public ResponseEntity<?> VoteEspecialist(@PathVariable String especialistId, @RequestParam String vote){
+        Map<String, Object> response = new HashMap<>();
+        try{
+            int Vote = Integer.parseInt(vote);
+            EspecialistaVC vottedEspecialistaVC = this.especialistaVCService.voteEspecialist(Vote, especialistId);
+            return ResponseEntity.ok(vottedEspecialistaVC);
+        }
+        catch(Exception ex){
+            response.put("cause",ex.getCause());
+            response.put("message", ex.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
     }
 
     @PostMapping("/CrearEspecialista")

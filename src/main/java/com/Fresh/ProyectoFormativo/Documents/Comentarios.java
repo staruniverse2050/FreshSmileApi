@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class Comentarios {
     private String Comentario;
-    private String NombreUsuario;
+    private String userId;
 }
