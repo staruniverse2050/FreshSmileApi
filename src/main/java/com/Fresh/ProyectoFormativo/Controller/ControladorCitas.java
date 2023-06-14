@@ -44,6 +44,14 @@ public class ControladorCitas {
         response.put("message", mensaje);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+    @GetMapping("/BuscarCita/{id}")
+    public ResponseEntity<?> buscarCita(@PathVariable int id) {
+    Citas cita = citasService.BuscarCita(id);
+    if (cita == null) {
+        return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(cita);
+}
 
     @PutMapping("/ModificarCita/{id}")
     public ResponseEntity<Citas> modificarCita(@PathVariable int id, @RequestBody Citas citas) {
