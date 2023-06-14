@@ -16,6 +16,9 @@ public class Procedimiento {
     @Column(name = "identificacion_procedimientos")
     private int identificacion_procedimientos;
 
+    @Column(name="identificacion_especialista")
+    private int identificacion_especialista;
+
     @Column(name = "nombre")
     private String nombre;
 
@@ -26,6 +29,13 @@ public class Procedimiento {
     private BigDecimal costo;
 
 
+    public int getIdentificacion_especialista() {
+        return identificacion_especialista;
+    }
+
+    public void setIdentificacion_especialista(int identificacion_especialista) {
+        this.identificacion_especialista = identificacion_especialista;
+    }
 
     public int getIdentificacion_procedimientos() {
         return identificacion_procedimientos;
@@ -58,4 +68,6 @@ public class Procedimiento {
     public void setCosto(BigDecimal costo) {
         this.costo = costo;
     }
+
+
 }
