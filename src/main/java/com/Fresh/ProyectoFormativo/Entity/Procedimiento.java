@@ -15,7 +15,7 @@ public class Procedimiento {
     @Column(name = "identificacion_procedimientos")
     private int identificacion_procedimientos;
 
-    @Column(name="identificacion_especialistas")
+    @Column(name = "identificacion_especialistas")
     private int identificacion_especialistas;
 
     @Column(name = "nombre")
@@ -27,8 +27,7 @@ public class Procedimiento {
     @Column(name = "costo")
     private BigDecimal costo;
 
-
-    public int getIdentificacion_especialistas() {
+  public int getIdentificacion_especialistas() {
         return identificacion_especialistas;
     }
 
@@ -36,6 +35,7 @@ public class Procedimiento {
         this.identificacion_especialistas = identificacion_especialistas;
     }
 
+  
     public int getIdentificacion_procedimientos() {
         return identificacion_procedimientos;
     }
