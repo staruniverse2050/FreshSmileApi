@@ -12,8 +12,8 @@ public class Procedimiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "identificacion_procedimientos")
-    private int identificacion_procedimientos;
+    @Column(name = "identificacion_especialistas")
+    private int identificacion_especialistas;
 
     @Column(name="identificacion_especialista")
     private int identificacion_especialista;
@@ -28,12 +28,12 @@ public class Procedimiento {
     private BigDecimal costo;
 
 
-    public int getIdentificacion_especialista() {
-        return identificacion_especialista;
+    public int getIdentificacion_especialistas() {
+        return identificacion_especialistas;
     }
 
-    public void setIdentificacion_especialista(int identificacion_especialista) {
-        this.identificacion_especialista = identificacion_especialista;
+    public void setIdentificacion_especialistas(int identificacion_especialistas) {
+        this.identificacion_especialistas = identificacion_especialistas;
     }
 
     public int getIdentificacion_procedimientos() {
