@@ -12,11 +12,11 @@ public class Procedimiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "identificacion_especialistas")
-    private int identificacion_especialistas;
+    @Column(name = "identificacion_procedimientos")
+    private int identificacion_procedimientos;
 
-    @Column(name="identificacion_especialista")
-    private int identificacion_especialista;
+    @Column(name="identificacion_especialistas")
+    private int identificacion_especialistas;
 
     @Column(name = "nombre")
     private String nombre;
