@@ -1,6 +1,5 @@
 package com.Fresh.ProyectoFormativo.Controller;
 
-import com.Fresh.ProyectoFormativo.Entity.Citas;
 import com.Fresh.ProyectoFormativo.Entity.Codigo_administrador;
 import com.Fresh.ProyectoFormativo.Service.Codigo_administradorService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -39,7 +39,7 @@ CREATE TABLE especialista (
 CREATE TABLE procedimientos (
                                 identificacion_procedimientos INT PRIMARY KEY AUTO_INCREMENT,
                                 nombre VARCHAR(100),
-                                descripcion VARCHAR(200),
+                                descripcion VARCHAR(65535),
                                 costo DECIMAL(10, 3)
 );
 

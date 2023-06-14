@@ -8,7 +8,6 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "procedimientos")
-@Data
 public class Procedimiento {
 
     @Id

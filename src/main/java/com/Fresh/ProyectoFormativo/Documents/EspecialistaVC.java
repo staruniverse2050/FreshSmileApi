@@ -3,6 +3,8 @@ package com.Fresh.ProyectoFormativo.Documents;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 public class EspecialistaVC {
     @Id
     private String id;
+    @Indexed
     private int identificacion_especialista;
     private Double Valoracion = 0.0;
     private List<Number> votos = new ArrayList<Number>();

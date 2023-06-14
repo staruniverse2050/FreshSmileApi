@@ -4,15 +4,21 @@ import com.Fresh.ProyectoFormativo.Documents.Comentarios;
 import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
 import com.Fresh.ProyectoFormativo.Entity.Especialista;
 import com.Fresh.ProyectoFormativo.Entity.Paciente;
+import com.Fresh.ProyectoFormativo.Models.ReqCommentModel;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaService;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaServiceIMPL.EspecialistaServiceIMPL;
+import com.Fresh.ProyectoFormativo.utils.JWTUtils;
+
+import io.jsonwebtoken.Claims;
+
 import com.Fresh.ProyectoFormativo.Service.EspecialistaVCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +30,8 @@ public class ControladorEspecialista {
     private EspecialistaService especialistaService;
 
     private EspecialistaVCService especialistaVCService;
+
+    private JWTUtils jwtUtils = new JWTUtils();
 
     @Autowired
     public ControladorEspecialista(EspecialistaVCService especialistaVCService, EspecialistaService especialistaService) {
@@ -42,6 +50,37 @@ public class ControladorEspecialista {
     public ResponseEntity<?> GetRatingEspecialists(){
         List<EspecialistaVC> especialistaVCs = especialistaVCService.getAllEspecialist();
         return ResponseEntity.ok(especialistaVCs);
+    }
+
+    @PatchMapping("/comentar/{especialistId}")
+    public ResponseEntity<?> CommentEspecialist(@RequestBody Comentarios newComment, @PathVariable String especialistId){
+        Map<String, Object> response = new HashMap<>();
+        try{
+            Claims claims = jwtUtils.getTokenClaims(((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").replace("Bearer ", ""));
+            newComment.setUserId(claims.get("userId").toString());
+            EspecialistaVC commentedEspecialistaVC = this.especialistaVCService.comentEspecialist(newComment, especialistId);
+            return ResponseEntity.ok(commentedEspecialistaVC);
+        }
+        catch(Exception ex){
+            response.put("cause",ex.getCause());
+            response.put("message", ex.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
+    @PatchMapping("/añadirVoto/{especialistId}")
+    public ResponseEntity<?> VoteEspecialist(@PathVariable String especialistId, @RequestParam String vote){
+        Map<String, Object> response = new HashMap<>();
+        try{
+            int Vote = Integer.parseInt(vote);
+            EspecialistaVC vottedEspecialistaVC = this.especialistaVCService.voteEspecialist(Vote, especialistId);
+            return ResponseEntity.ok(vottedEspecialistaVC);
+        }
+        catch(Exception ex){
+            response.put("cause",ex.getCause());
+            response.put("message", ex.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
     }
 
     @PostMapping("/CrearEspecialista")
