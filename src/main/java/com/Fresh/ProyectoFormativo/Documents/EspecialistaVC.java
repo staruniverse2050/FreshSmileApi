@@ -1,7 +1,6 @@
 package com.Fresh.ProyectoFormativo.Documents;
 
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import org.springframework.data.mongodb.core.index.Indexed;

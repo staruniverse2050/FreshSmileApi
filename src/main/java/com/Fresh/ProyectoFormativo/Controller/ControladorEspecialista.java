@@ -39,6 +39,23 @@ public class ControladorEspecialista {
         this.especialistaService = especialistaService;
     }
 
+    @PostMapping("/crearRating/{id}")
+    public ResponseEntity<?> CrearRatingEspecialista(@PathVariable String id){
+        Map<String, Object> response = new HashMap<>();
+        try{
+            EspecialistaVC creado = this.especialistaVCService.createEspecialst(new EspecialistaVC(Integer.parseInt(id)));
+            response.put("message", "Creado correctamente");
+            response.put("error", false);
+            response.put("creado", creado);
+            return ResponseEntity.ok(response);
+        }
+        catch(Exception err){
+            response.put("error", true);
+            response.put("message", err.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
     //Especialista principal//
     @GetMapping("/ConsultarEspecialista")
     public ResponseEntity<List<Especialista>> consultarEspecialista() {
