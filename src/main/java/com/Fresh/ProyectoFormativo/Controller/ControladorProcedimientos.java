@@ -29,12 +29,13 @@ public class ControladorProcedimientos {
             return ResponseEntity.ok(procedimiento);
         }
 
-        @PostMapping("/CrearProcedimiento")
-        public ResponseEntity<String> crearProcedimiento(@RequestBody Procedimiento procedimiento) {
-            Procedimiento nuevoProcedimiento = procedimientoService.CrearProcedimiento(procedimiento);
-            String mensaje = "Procedimietno creado exitosamente";
-            return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
-        }
+    @PostMapping("/CrearProcedimiento")
+    public ResponseEntity<String> crearProcedimiento(@RequestBody Procedimiento procedimiento) {
+        Procedimiento nuevoProcedimiento = procedimientoService.CrearProcedimiento(procedimiento);
+        String mensaje = "Procedimiento creado exitosamente";
+        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
+    }
+
 
     @PutMapping
     @RequestMapping(value = "/ModificarProcedimiento",method = RequestMethod.PUT)
