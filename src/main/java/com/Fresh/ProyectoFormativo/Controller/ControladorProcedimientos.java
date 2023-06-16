@@ -29,12 +29,15 @@ public class ControladorProcedimientos {
             return ResponseEntity.ok(procedimiento);
         }
 
-    @PostMapping("/CrearProcedimiento")
-    public ResponseEntity<String> crearProcedimiento(@RequestBody Procedimiento procedimiento) {
-        Procedimiento nuevoProcedimiento = procedimientoService.CrearProcedimiento(procedimiento);
-        String mensaje = "Procedimietno creado exitosamente";
-        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
+    @PostMapping("/CrearProcedimientos")
+    public ResponseEntity<?> crearProcedimientos(@RequestBody Procedimiento procedimiento) {
+        Procedimiento procedimientoCreado = this.procedimientoService.CrearProcedimiento(procedimiento);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Paciente creado con éxito");
+        response.put("pacienteCreado", procedimientoCreado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
     @PutMapping("/ModificarProcedimiento")
     public ResponseEntity<?> modificarProcedimiento(@RequestBody Procedimiento procedimiento) {
         try {
