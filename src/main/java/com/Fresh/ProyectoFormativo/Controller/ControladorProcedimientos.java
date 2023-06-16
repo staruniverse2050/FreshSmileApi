@@ -53,8 +53,9 @@ public class ControladorProcedimientos {
     @DeleteMapping("/EliminarProcedimiento/{id}")
     public ResponseEntity<String> eliminarProcedimiento(@PathVariable int id) {
         procedimientoService.EliminarProcedimiento(id);
-        String mensaje = "Procedimiento eliminado exitosamente";
+        String mensaje = "Procedimiento con ID " + id + " eliminado exitosamente";
         return ResponseEntity.noContent().header("Message", mensaje).build();
     }
-    }
+
+}
 
