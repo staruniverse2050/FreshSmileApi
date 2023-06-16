@@ -42,11 +42,11 @@ public class ControladorProcedimientos {
     public ResponseEntity<?> modificarProcedimiento(@RequestBody Procedimiento procedimiento) {
         try {
             Procedimiento procedimientoModificado = this.procedimientoService.ModificarProcedimiento(procedimiento);
-            String message = "Procedimiento modificado con éxito.";
+            String message = "Procedimiento modificado exitosamente.";
             Map<String, Object> response = new HashMap<>();
             response.put("message", message);
             response.put("procedimiento", procedimientoModificado);
-            return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok(response);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
