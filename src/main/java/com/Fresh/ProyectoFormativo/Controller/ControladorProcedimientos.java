@@ -24,7 +24,7 @@ public class ControladorProcedimientos {
         }
 
         @GetMapping("/ConsultarProcedimientos")
-        public ResponseEntity<List<Procedimiento>> consultarTipo() {
+        public ResponseEntity<List<Procedimiento>> consultarCitas() {
             List<Procedimiento> procedimiento = procedimientoService.ConsultarProcedimientos();
             return ResponseEntity.ok(procedimiento);
         }
