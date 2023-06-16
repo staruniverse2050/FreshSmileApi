@@ -35,21 +35,20 @@ public class ControladorProcedimientos {
         String mensaje = "Procedimietno creado exitosamente";
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
-    @PutMapping
-    @RequestMapping(value = "/ModificarProcedimiento",method = RequestMethod.PUT)
-    public ResponseEntity<?>ModificarProcedimiento(@RequestBody Procedimiento procedimiento){
-        try{
-            Procedimiento ProcedimientoModificado=this.procedimientoService.ModificarProcedimiento(procedimiento);
+    @PutMapping("/ModificarProcedimiento")
+    public ResponseEntity<?> modificarProcedimiento(@RequestBody Procedimiento procedimiento) {
+        try {
+            Procedimiento procedimientoModificado = this.procedimientoService.ModificarProcedimiento(procedimiento);
             String message = "Procedimiento modificado con éxito.";
             Map<String, Object> response = new HashMap<>();
             response.put("message", message);
-            response.put("procedimiento", ProcedimientoModificado);
+            response.put("procedimiento", procedimientoModificado);
             return ResponseEntity.ok().body(response);
-        }
-        catch(Exception ex){
-            return ResponseEntity.internalServerError().body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
     }
+
 
 
     @DeleteMapping("/EliminarProcedimiento/{id}")
