@@ -18,7 +18,7 @@ public class ControladorProcedimientos {
 
         private final ProcedimientoService procedimientoService;
 
-        @Autowired
+    @Autowired
         public  ControladorProcedimientos( ProcedimientoService procedimientoService) {
             this.procedimientoService = procedimientoService;
         }
@@ -33,23 +33,21 @@ public class ControladorProcedimientos {
     public ResponseEntity<?> crearProcedimientos(@RequestBody Procedimiento procedimiento) {
         Procedimiento procedimientoCreado = this.procedimientoService.CrearProcedimiento(procedimiento);
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "Paciente creado con éxito");
-        response.put("pacienteCreado", procedimientoCreado);
+        response.put("message", "Procedimiento creado con éxito");
+        response.put("procedimientoCreado", procedimientoCreado);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("/ModificarProcedimiento")
-    public ResponseEntity<?> modificarProcedimiento(@RequestBody Procedimiento procedimiento) {
-        try {
-            Procedimiento procedimientoModificado = this.procedimientoService.ModificarProcedimiento(procedimiento);
-            String message = "Procedimiento modificado exitosamente.";
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", message);
-            response.put("procedimiento", procedimientoModificado);
-            return ResponseEntity.ok(response);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
-        }
+
+    @PutMapping
+    @RequestMapping(value = "/ModificarProcedimiento",method = RequestMethod.PUT)
+    public ResponseEntity<?>ModificarProcedimiento(@RequestBody Procedimiento procedimiento){
+        Procedimiento ProcedimientoModificado=this.procedimientoService.ModificarProcedimiento(procedimiento);
+        String message = "Procedimiento modificado con éxito.";
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", message);
+        response.put("procedimiento", ProcedimientoModificado);
+        return ResponseEntity.ok().body(response);
     }
 
 
