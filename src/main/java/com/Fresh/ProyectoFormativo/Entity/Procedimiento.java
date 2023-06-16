@@ -21,13 +21,26 @@ public class Procedimiento {
     @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "foto")
+    private String foto;
+
+
     @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "costo")
     private BigDecimal costo;
 
-  public int getIdentificacion_especialistas() {
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public int getIdentificacion_especialistas() {
         return identificacion_especialistas;
     }
 
