@@ -18,11 +18,10 @@ public class Procedimiento {
     @Column(name = "identificacion_especialistas")
     private int identificacion_especialistas;
 
-    @Column(name = "nombre")
-    private String nombre;
-
     @Column(name = "foto")
     private String foto;
+    @Column(name = "nombre")
+    private String nombre;
 
 
     @Column(name = "descripcion")
@@ -32,12 +31,12 @@ public class Procedimiento {
     private BigDecimal costo;
 
 
-    public String getFoto() {
-        return foto;
+    public int getIdentificacion_procedimientos() {
+        return identificacion_procedimientos;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setIdentificacion_procedimientos(int identificacion_procedimientos) {
+        this.identificacion_procedimientos = identificacion_procedimientos;
     }
 
     public int getIdentificacion_especialistas() {
@@ -48,13 +47,12 @@ public class Procedimiento {
         this.identificacion_especialistas = identificacion_especialistas;
     }
 
-  
-    public int getIdentificacion_procedimientos() {
-        return identificacion_procedimientos;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setIdentificacion_procedimientos(int identificacion_procedimientos) {
-        this.identificacion_procedimientos = identificacion_procedimientos;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getNombre() {
@@ -80,6 +78,4 @@ public class Procedimiento {
     public void setCosto(BigDecimal costo) {
         this.costo = costo;
     }
-
-
 }
