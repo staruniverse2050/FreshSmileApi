@@ -14,7 +14,6 @@ import java.util.List;
 public class EspecialistaVC {
     @Id
     private String id;
-    @Indexed
     private int identificacion_especialista;
     private Double Valoracion = 0.0;
     private List<Voto> votos = new ArrayList<Voto>();
