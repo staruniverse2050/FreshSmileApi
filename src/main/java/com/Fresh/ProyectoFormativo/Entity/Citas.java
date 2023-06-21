@@ -46,9 +46,6 @@ public class Citas {
     @Column(name = "estado_cita")
     private String estado_cita;
 
-    @Column(name = "estado")
-    private boolean Estado;
-
     @Column(name = "fecha_de_creacion")
     private LocalDateTime fecha_de_creacion;
 
@@ -134,19 +131,8 @@ public class Citas {
 
     public Citas() {
         this.fecha_de_creacion= LocalDateTime.now();
-        this.Estado = true;
     }
 
-    public String getEstado() {
-        if (Estado) {
-            return "Agendada";
-        } else {
-            return "Cancelada";
-        }
-    }
-    public void setEstado(boolean Estado) {
-        this.Estado = Estado;
-    }
 
     public LocalDateTime getFecha_de_creacion() {
         return fecha_de_creacion;

@@ -18,46 +18,43 @@ public class ControladorProcedimientos {
 
         private final ProcedimientoService procedimientoService;
 
-        @Autowired
+    @Autowired
         public  ControladorProcedimientos( ProcedimientoService procedimientoService) {
             this.procedimientoService = procedimientoService;
         }
 
         @GetMapping("/ConsultarProcedimientos")
-        public ResponseEntity<List<Procedimiento>> consultarTipo() {
+        public ResponseEntity<List<Procedimiento>> consultarCitas() {
             List<Procedimiento> procedimiento = procedimientoService.ConsultarProcedimientos();
             return ResponseEntity.ok(procedimiento);
         }
 
-        @PostMapping("/CrearProcedimiento")
-        public ResponseEntity<String> crearProcedimiento(@RequestBody Procedimiento procedimiento) {
-            Procedimiento nuevoProcedimiento = procedimientoService.CrearProcedimiento(procedimiento);
-            String mensaje = "Procedimietno creado exitosamente";
-            return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
-        }
+    @PostMapping("/CrearProcedimiento")
+    public ResponseEntity<String> crearProcedimiento(@RequestBody Procedimiento procedimiento) {
+        Procedimiento nuevoProcedimiento = procedimientoService.CrearProcedimiento(procedimiento);
+        String mensaje = "Procedimiento creado exitosamente. ID: " + nuevoProcedimiento.getIdentificacion_procedimientos();
+        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
+    }
+
 
     @PutMapping
     @RequestMapping(value = "/ModificarProcedimiento",method = RequestMethod.PUT)
     public ResponseEntity<?>ModificarProcedimiento(@RequestBody Procedimiento procedimiento){
-        try{
-            Procedimiento ProcedimientoModificado=this.procedimientoService.ModificarProcedimiento(procedimiento);
-            String message = "Procedimiento modificado con éxito.";
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", message);
-            response.put("procedimiento", ProcedimientoModificado);
-            return ResponseEntity.ok().body(response);
-        }
-        catch(Exception ex){
-            return ResponseEntity.internalServerError().body(ex.getMessage());
-        }
+        Procedimiento ProcedimientoModificado=this.procedimientoService.ModificarProcedimiento(procedimiento);
+        String message = "Procedimiento modificado con éxito.";
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", message);
+        response.put("procedimiento", ProcedimientoModificado);
+        return ResponseEntity.ok().body(response);
     }
 
 
+
     @DeleteMapping("/EliminarProcedimiento/{id}")
-        public ResponseEntity<String> eliminarProcedimiento(@PathVariable int id) {
-            procedimientoService.EliminarProcedimiento(id);
-            String mensaje = "Procedimiento eliminado exitosamente";
-            return ResponseEntity.noContent().header("Message", mensaje).build();
-        }
+    public ResponseEntity<String> eliminarProcedimiento(@PathVariable int id) {
+        procedimientoService.EliminarProcedimiento(id);
+        String mensaje = "Procedimiento eliminado exitosamente";
+        return ResponseEntity.noContent().header("Message", mensaje).build();
+    }
     }
 

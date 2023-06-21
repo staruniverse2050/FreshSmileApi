@@ -2,6 +2,7 @@ package com.Fresh.ProyectoFormativo.Controller;
 
 import com.Fresh.ProyectoFormativo.Documents.Comentarios;
 import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
+import com.Fresh.ProyectoFormativo.Documents.Voto;
 import com.Fresh.ProyectoFormativo.Entity.Especialista;
 import com.Fresh.ProyectoFormativo.Entity.Paciente;
 import com.Fresh.ProyectoFormativo.Models.ReqCommentModel;
@@ -90,7 +91,8 @@ public class ControladorEspecialista {
         Map<String, Object> response = new HashMap<>();
         try{
             int Vote = Integer.parseInt(vote);
-            EspecialistaVC vottedEspecialistaVC = this.especialistaVCService.voteEspecialist(Vote, especialistId);
+            Claims claims = jwtUtils.getTokenClaims(((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").replace("Bearer ", ""));
+            EspecialistaVC vottedEspecialistaVC = this.especialistaVCService.voteEspecialist(new Voto(Vote, claims.get("userId").toString()), especialistId);
             return ResponseEntity.ok(vottedEspecialistaVC);
         }
         catch(Exception ex){

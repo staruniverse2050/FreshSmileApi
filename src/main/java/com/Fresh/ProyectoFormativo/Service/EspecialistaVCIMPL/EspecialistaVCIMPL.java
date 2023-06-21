@@ -2,6 +2,7 @@ package com.Fresh.ProyectoFormativo.Service.EspecialistaVCIMPL;
 
 import com.Fresh.ProyectoFormativo.Documents.Comentarios;
 import com.Fresh.ProyectoFormativo.Documents.EspecialistaVC;
+import com.Fresh.ProyectoFormativo.Documents.Voto;
 import com.Fresh.ProyectoFormativo.Repository.EspecialistaVCRepo;
 import com.Fresh.ProyectoFormativo.Service.EspecialistaVCService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +44,12 @@ public class EspecialistaVCIMPL implements EspecialistaVCService {
     }
 
     @Override
-    public EspecialistaVC voteEspecialist(Number vote, String id) {
+    public EspecialistaVC voteEspecialist(Voto vote, String id) {
         EspecialistaVC especialistasForVote = this.repo.findById(id).get();
-        List<Number> actualVotes = especialistasForVote.getVotos();
+        List<Voto> actualVotes = especialistasForVote.getVotos();
         actualVotes.add(vote);
         var voteWrapper = new Object(){ Number voteCount = 0; };
-        actualVotes.forEach(singleVote -> voteWrapper.voteCount = (int)singleVote + (int)voteWrapper.voteCount );
+        actualVotes.forEach(singleVote -> voteWrapper.voteCount = (int)singleVote.getVoto() + (int)voteWrapper.voteCount );
         voteWrapper.voteCount = (int)voteWrapper.voteCount / actualVotes.size();
         especialistasForVote.setVotos(actualVotes);
         especialistasForVote.setValoracion(voteWrapper.voteCount.doubleValue());

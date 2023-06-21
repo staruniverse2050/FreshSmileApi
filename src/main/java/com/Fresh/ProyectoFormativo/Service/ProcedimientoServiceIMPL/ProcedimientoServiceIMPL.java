@@ -20,7 +20,6 @@ public class ProcedimientoServiceIMPL implements ProcedimientoService {
 
     @Override
     public Procedimiento CrearProcedimiento(Procedimiento procedimiento) {
-        procedimiento.setNombre(procedimiento.getNombre());
         return this.repo.save(procedimiento);
     }
 

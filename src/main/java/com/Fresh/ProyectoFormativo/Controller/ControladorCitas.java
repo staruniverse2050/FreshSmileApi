@@ -66,16 +66,10 @@ public class ControladorCitas {
 
 
 
-    @DeleteMapping("CancelarCita/{id}")
-    public ResponseEntity<Map<String, Object>> desactivarCita(@PathVariable int id) {
-        Citas citaDesactivada = impl.BuscarCita(id);
-        citaDesactivada.setEstado(false);
-        impl.ModificarCita(citaDesactivada);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Cita desactivada con éxito");
-        response.put("citaDesactivada", citaDesactivada);
-
-        return ResponseEntity.ok().body(response);
+    @DeleteMapping("/CancelarCita/{id}")
+    public ResponseEntity<String> eliminarCita(@PathVariable int id) {
+        citasService.CancelarCita(id);
+        String mensaje = "Cita cancelada exitosamente";
+        return ResponseEntity.noContent().header("Message", mensaje).build();
     }
 }

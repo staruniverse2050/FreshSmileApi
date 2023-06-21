@@ -17,7 +17,7 @@ public class EspecialistaVC {
     @Indexed
     private int identificacion_especialista;
     private Double Valoracion = 0.0;
-    private List<Number> votos = new ArrayList<Number>();
+    private List<Voto> votos = new ArrayList<Voto>();
     private List<Comentarios> Comentarios = new ArrayList<Comentarios>();
 
     public EspecialistaVC(int identificacion_especialista){
@@ -25,7 +25,7 @@ public class EspecialistaVC {
     }
     public EspecialistaVC(){  }
 
-    public EspecialistaVC(String id, int identificacion_especialista, Double valoracion, List<Number> votos, List<Comentarios> comentarios){
+    public EspecialistaVC(String id, int identificacion_especialista, Double valoracion, List<Voto> votos, List<Comentarios> comentarios){
         this.identificacion_especialista = identificacion_especialista;
         this.Valoracion = valoracion;
         this.votos = votos;
