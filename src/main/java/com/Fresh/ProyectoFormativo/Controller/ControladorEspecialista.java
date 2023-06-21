@@ -92,7 +92,8 @@ public class ControladorEspecialista {
         try{
             int Vote = Integer.parseInt(vote);
             Claims claims = jwtUtils.getTokenClaims(((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").replace("Bearer ", ""));
-            EspecialistaVC vottedEspecialistaVC = this.especialistaVCService.voteEspecialist(new Voto(Vote, claims.get("userId").toString()), especialistId);
+            Voto newVote = new Voto(Vote, claims.get("userId").toString());
+            EspecialistaVC vottedEspecialistaVC = this.especialistaVCService.voteEspecialist(newVote, especialistId);
             return ResponseEntity.ok(vottedEspecialistaVC);
         }
         catch(Exception ex){
