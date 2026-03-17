@@ -16,21 +16,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Descargar código
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2. Configurar Java
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # 3. Construir proyecto
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
+      # 🔍 4. Verificar que el JAR exista (esto ayuda a evitar errores)
+      - name: Verify JAR file
+        run: ls -la target/
+
+      # 🚀 5. Deploy a Azure
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'FreshSmileApi'
+          app-name: FreshSmileApi
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: target/*.jar
