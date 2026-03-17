@@ -31,5 +31,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'FreshSmileApi'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_fb1ca241-a8f2-4421-ac1d-2b14e741be49 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_62e8fcba-929d-43e9-b8f2-629a6fe94b87 }}
           package: target/*.jar
