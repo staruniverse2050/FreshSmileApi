@@ -1,6 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
-name: Build and deploy JAR app to Azure Web App - freshsmile
+
+name: Build and deploy JAR app to Azure Web App - FreshSmileApi
 
 on:
   push:
@@ -13,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Java version
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -24,7 +26,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
-      - name: Upload artifact for deployment job
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: java-app
@@ -37,7 +39,7 @@ jobs:
       name: 'Production'
 
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: java-app
@@ -45,6 +47,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'freshsmile'
+          app-name: 'FreshSmileApi'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_fb1ca241-a8f2-4421-ac1d-2b14e741be49 }}
           package: '*.jar'
